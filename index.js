@@ -1,7 +1,11 @@
 import express from 'express';
 import axios from 'axios';
 import dotenv from 'dotenv';
-import { escapeMarkdown } from 'discord.js';
+import {
+  readData,
+  writeData,
+  fetchTeamData,
+} from "./utils.js";
 
 dotenv.config();
 
@@ -38,42 +42,8 @@ app.get('/team/:team_key', async (req, res) => {
 //using bluealliance TBA API v3 - get name, number, city, and country of all teams
 app.get('/teams', async (req, res) => {
     // const pageNum = req.params.page;
-    let page = 0;
-    let moreTeams = true;
-    var allTeams = [];
-  
-    try {
-        while(moreTeams){
-            const response = await axios.get(`https://www.thebluealliance.com/api/v3/teams/${page}/simple`, {
-            headers: {
-                'X-TBA-Auth-Key': API_KEY,
-                'Content-Type': 'application/json',
-            },
-            });
-            
-            const teamInfo = response.data;
-
-            if (teamInfo.length === 0) {
-                moreTeams = false;
-                break;
-            }
-            
-            const fTeams = teamInfo.map(team => ({
-            name: team.nickname,
-            number: team.team_number,
-            country: team.country,
-            city: team.city,
-            }));
-
-            allTeams = allTeams.concat(fTeams);
-
-            page++;
-        }
-        res.json(allTeams);
-    } catch (error) {
-      console.error('Error fetching data from TBA API:', error);
-      res.status(500).json({ error: 'An error occurred while fetching data from TBA.' });
-    }
+    await fetchTeamData();
+    res.json(readData());
   });
 
 app.listen(PORT, () => {
