@@ -5,6 +5,8 @@ import {
   readData,
   writeData,
   fetchTeamData,
+  filterName,
+  searchByKey,
 } from "./utils.js";
 
 dotenv.config();
@@ -14,37 +16,24 @@ const app = express();
 
 const API_KEY = process.env.TBA_KEY;
 
-//test
-app.get("/api", (req, res) => {
-    res.json({ message: "Hello from server!" });
-});
-
+// endpoints - not needed right now
 //using bluealliance TBA API v3 - get a specific team using team key
 app.get('/team/:team_key', async (req, res) => {
   const teamKey = req.params.team_key;
 
-  try {
-    const response = await axios.get(`https://www.thebluealliance.com/api/v3/team/${teamKey}`, {
-      headers: {
-        'X-TBA-Auth-Key': API_KEY,
-        'Content-Type': 'application/json',
-      },
-    });
-    
-    res.json(response.data);
-  } catch (error) {
-    console.error('Error fetching data from TBA API:', error);
-    console.log(teamKey);
-    res.status(500).json({ error: 'An error occurred while fetching data from TBA.' });
-  }
+ res.json(await searchByKey(teamKey));
 });
 
-//using bluealliance TBA API v3 - get name, number, city, and country of all teams
+//using bluealliance TBA API v3 - stores and gets name, number, city, and country of all teams
 app.get('/teams', async (req, res) => {
     // const pageNum = req.params.page;
     await fetchTeamData();
     res.json(readData());
-  });
+});
+
+//testing
+// console.log(filterName("a", 20, 2));
+// console.log(await searchByKey("frc254"));
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);

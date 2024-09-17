@@ -5,6 +5,7 @@ import axios from 'axios';
 const path = "./data.json";
 const API_KEY = process.env.TBA_KEY;
 
+//reads data from data.json
 export function readData() {
   try {
     if (!fs.existsSync(path)) {
@@ -18,6 +19,7 @@ export function readData() {
   }
 }
 
+//writes data to data.json
 export function writeData(d) {
   try {
     fs.writeFileSync(path, JSON.stringify(d, null, 2), "utf8");
@@ -26,6 +28,7 @@ export function writeData(d) {
   }
 }
 
+//fetches team name, number, city, and country from all frc teams and stores it in data.json
 export async function fetchTeamData(){
   let page = 0;
   let moreTeams = true;
@@ -61,5 +64,41 @@ export async function fetchTeamData(){
   } catch (error) {
     console.error('Error fetching data from TBA API:', error);
     // res.status(500).json({ error: 'An error occurred while fetching data from TBA.' });
+  }
+}
+
+//filters teams by name
+export async function filterName(str, pageLen, pageNum){
+  const data = readData();
+  var matchCount = 0;
+  var page = [];
+
+  for(var i = 0; i < data.length; i++){
+    if(data[i].name.toLowerCase().includes(str)){
+      matchCount++;
+      if(matchCount > (pageNum-1)*pageLen && matchCount <= pageNum*pageLen){
+        page.push(data[i]);
+      }
+    }
+  }
+
+  return page;
+}
+
+//fetches team info using the team key
+export async function searchByKey(teamKey){
+  try {
+    const response = await axios.get(`https://www.thebluealliance.com/api/v3/team/${teamKey}`, {
+      headers: {
+        'X-TBA-Auth-Key': API_KEY,
+        'Content-Type': 'application/json',
+      },
+    });
+    
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching data from TBA API:', error);
+    console.log(teamKey);
+    res.status(500).json({ error: 'An error occurred while fetching data from TBA.' });
   }
 }
