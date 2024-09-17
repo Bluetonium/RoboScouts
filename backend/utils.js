@@ -5,6 +5,12 @@ import axios from 'axios';
 const path = "./data.json";
 const API_KEY = process.env.TBA_KEY;
 
+export function start(){
+  const server = express();
+
+  return server;
+}
+
 //reads data from data.json
 export function readData() {
   try {
@@ -68,7 +74,7 @@ export async function fetchTeamData(){
 }
 
 //filters teams by name
-export async function filterName(str, pageLen, pageNum){
+export async function filterByName(str, pageLen, pageNum){
   const data = readData();
   var matchCount = 0;
   var page = [];

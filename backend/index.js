@@ -5,14 +5,15 @@ import {
   readData,
   writeData,
   fetchTeamData,
-  filterName,
+  filterByName,
   searchByKey,
-} from "./utils.js";
+} from './utils.js';
+import cron from 'node-cron';
 
 dotenv.config();
 
 const PORT = process.env.PORT || 3001;
-const app = express();
+const app = start();
 
 const API_KEY = process.env.TBA_KEY;
 
@@ -31,8 +32,15 @@ app.get('/teams', async (req, res) => {
     res.json(readData());
 });
 
+cron.schedule(
+  "0 0 * * *",
+  async () => {
+    console.log("[RoboScouts] - List Updated!");
+    fetchTeamData();
+  });
+
 //testing
-// console.log(filterName("a", 20, 2));
+// console.log(filterByName("a", 20, 2));
 // console.log(await searchByKey("frc254"));
 
 app.listen(PORT, () => {
