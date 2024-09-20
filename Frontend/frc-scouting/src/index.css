@@ -11,6 +11,8 @@
 
   --background: #F7EBEC;
   --text: #151515;
+  --red: #FF6961;
+  --blue: #4F738E;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -59,8 +61,8 @@ html {
 }
 
 header {
-  position: flex;
-  height: 64px;
+  position: fixed;
+  height: 72px;
   width: 100%;
 
   top: 0;
@@ -82,7 +84,7 @@ header .leftSection {
   align-items: center;
 
   padding: 16px;
-  padding-left: 32px;
+  padding-left: 64px;
 }
 
 header .leftSection h2 {
@@ -101,5 +103,96 @@ header .leftSection h3 {
 }
 
 header .leftSection h3:hover {
-  color: red;
+  color: var(--red);
+}
+
+header .rightSection {
+  height: 100%;
+  width: 20%;
+  flex-grow: 0;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+
+  padding: 8px;
+  padding-right: 64px;
+}
+
+main {
+  margin-top: 64px;
+}
+
+main .hero {
+  height: 75vh;
+  height: 75svh;
+
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+}
+
+main .hero .leftSection {
+  position: relative;
+  height: 100%;
+  width: 40%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+main .hero .leftSection img {
+  height: 100%;
+  width: 100%;
+
+  object-fit: contain;
+}
+
+main .hero .rightSection {
+  height: 100%;
+
+  width: 60%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding: 64px;
+  padding-left: 16px;
+}
+
+main .hero .rightSection h1 {
+  font-family: "M PLUS Code Latin", monospace;
+  font-optical-sizing: auto;
+  font-style: normal;
+
+  line-height: 1.5;
+  letter-spacing: 0.07em;
+  font-size: 6em;
+  font-weight: 300;
+
+  vertical-align: middle;
+
+  color: var(--text);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+main .hero .rightSection h3 {
+  padding-bottom: 16px;
+}
+
+main .hero .rightSection .buttonBox {
+  height: auto;
+  width: auto;
+  display: flex;
+  flex-direction: row;
 }

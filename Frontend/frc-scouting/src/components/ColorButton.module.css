@@ -1,0 +1,36 @@
+.colorButton {
+    height: 48px;
+    width: auto;
+    padding: 4px 24px;
+  
+    border: 3px solid var(--blue);
+    border-radius: 4px;
+  
+    cursor: pointer;
+  
+    font-family: "M PLUS Code Latin", monospace;
+    font-optical-sizing: auto;
+    font-style: normal;
+  
+    text-align: center;
+  
+    line-height: 1.5;
+    letter-spacing: 0.05em;
+    font-size: 1.1em;
+    font-weight: 400;
+  
+    vertical-align: middle;
+  
+    color: var(--blue);
+  
+    background: none;
+  
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  
+    transition: 0.1s ease-in;
+  
+    min-width: fit-content;
+}
