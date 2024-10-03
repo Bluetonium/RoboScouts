@@ -1,0 +1,70 @@
+.loadingScreen {
+    position: fixed;
+
+    height: 100%;
+    width: 100%;
+
+    background-color: var(--background);
+
+    z-index: 970;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding-bottom: 104px;
+
+    animation-fill-mode: forwards;
+}
+
+.loadingWidget {
+    height: auto;
+    width: 200px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+    width: fit-content;
+    padding-bottom: 5px;
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 30px;
+    overflow: hidden;
+    color: #0000;
+    text-shadow: 0 0 0 #000,10ch 0 0 #000;
+    background: linear-gradient(#000 0 0) bottom left/0% 3px no-repeat;
+    animation: l14 1.5s infinite;
+  }
+.loader:before {
+    content: "Loading...";
+}
+@keyframes l14 {
+    80%  {text-shadow:    0  0 0 #000,10ch 0 0 #000;background-size:100% 3px}
+    100% {text-shadow: -10ch 0 0 #000,0    0 0 #000}
+}
+
+@keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+.flex {
+    display: flex;
+}
+
+.fade {
+    animation: fadeOut 0.5s ease-out;
+}
+
+.hidden {
+    display: none;
+}

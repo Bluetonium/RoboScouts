@@ -1,0 +1,84 @@
+
+.CTAButtonBox {
+    display: inline-block;
+    position: relative;
+
+    height: auto;
+    width: auto;
+
+    min-width: fit-content;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: 0.1s ease-in;
+}
+
+.CTAButton {
+    position: relative;
+    height: 48px;
+    width: auto;
+
+    padding: 4px 24px;
+
+    border-radius: 4px;
+  
+    cursor: pointer;
+  
+    font-family: "M PLUS Code Latin", monospace;
+    font-optical-sizing: auto;
+    font-style: normal;
+  
+    text-align: center;
+  
+    line-height: 1.5;
+    letter-spacing: 0.05em;
+    font-size: 1.1em;
+    font-weight: 400;
+  
+    vertical-align: middle;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  
+    transition: 0.075s ease-in;
+  
+    min-width: fit-content;
+
+    border: 3px solid var(--text);
+
+    white-space: nowrap;
+
+    outline: none;
+    z-index: 10;
+}
+
+.CTAButtonBack {
+    height: 100%;
+    width: 100%;
+
+    position: absolute;
+
+    flex-grow: 1;
+
+    background-color: var(--text);
+    border-radius: 3px;
+
+    z-index: 9;
+
+    transition: 0.075s ease-in;
+}
+
+/*floating-y effect?*/
+
+.CTAButtonBox:hover .CTAButtonBack {
+    transform: scale(1.05) translateX(-3px) translateY(3px) !important;
+    opacity: 0.9;
+}
+
+.CTAButtonBox:hover .CTAButton {
+    transform: scale(1.05) translateX(3px) translateY(-3px) !important;
+}

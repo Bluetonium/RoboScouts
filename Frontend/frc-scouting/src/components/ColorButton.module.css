@@ -34,3 +34,17 @@
   
     min-width: fit-content;
 }
+
+.hoverMode1:hover {
+    transform: scale(1.05) !important;
+    background-color: #151515 !important;
+    color: #FF6961 !important;
+    border: 3px solid #FF6961 !important;
+}
+
+.hoverMode2:hover {
+    transform: scale(1.05) !important;
+    background-color: #4F738E !important;
+    color: #F7EBEC !important;
+    border: 3px solid #4F738E !important;
+}

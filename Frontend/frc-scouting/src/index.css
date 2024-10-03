@@ -11,6 +11,7 @@
 
   --background: #F7EBEC;
   --text: #151515;
+  --lightText: #444444;
   --red: #FF6961;
   --blue: #4F738E;
 
@@ -31,15 +32,54 @@
 }
 
 
+.bodyDarkText {
+  font-family: "M PLUS Code Latin", monospace;
+  font-optical-sizing: auto;
+  font-style: normal;
+
+  line-height: 1.40;
+  letter-spacing: 0.05em;
+  font-size: 1.35em;
+  font-weight: 400;
+
+  vertical-align: middle;
+
+  color: var(--text);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 .titleDarkText {
   font-family: "M PLUS Code Latin", monospace;
   font-optical-sizing: auto;
   font-style: normal;
 
-  line-height: 1.5;
+  line-height: 1.60;
   letter-spacing: 0.05em;
   font-size: 1.5em;
+  font-weight: 400;
+
+  vertical-align: middle;
+
+  color: var(--text);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.headerDarkText {
+  font-family: "M PLUS Code Latin", monospace;
+  font-optical-sizing: auto;
+  font-style: normal;
+
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+  font-size: 3em;
   font-weight: 400;
 
   vertical-align: middle;
@@ -58,66 +98,6 @@
 
 html {
   background-color: var(--background);
-}
-
-header {
-  position: fixed;
-  height: 72px;
-  width: 100%;
-
-  top: 0;
-
-  background-color: var(--background);
-
-  display: flex;
-  flex-direction: row;
-}
-
-header .leftSection {
-  height: 100%;
-  width: 50%;
-  flex-grow: 1;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-
-  padding: 16px;
-  padding-left: 64px;
-}
-
-header .leftSection h2 {
-  margin-right: 40px;
-  font-weight: 500;
-
-  cursor: pointer;
-}
-
-header .leftSection h3 {
-  margin-right: 32px;
-
-  cursor: pointer;
-
-  transition: 0.1s ease-in;
-}
-
-header .leftSection h3:hover {
-  color: var(--red);
-}
-
-header .rightSection {
-  height: 100%;
-  width: 20%;
-  flex-grow: 0;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-
-  padding: 8px;
-  padding-right: 64px;
 }
 
 main {
@@ -174,7 +154,7 @@ main .hero .rightSection h1 {
   line-height: 1.5;
   letter-spacing: 0.07em;
   font-size: 6em;
-  font-weight: 300;
+  font-weight: 400;
 
   vertical-align: middle;
 
@@ -184,6 +164,8 @@ main .hero .rightSection h1 {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  margin-left: -6px;
 }
 
 main .hero .rightSection h3 {
@@ -195,4 +177,59 @@ main .hero .rightSection .buttonBox {
   width: auto;
   display: flex;
   flex-direction: row;
+}
+
+main .descriptionSection {
+  position: relative;
+  height: 75vh;
+  width: 100;
+
+  display: flex;
+  flex-direction: row;
+}
+
+main .descriptionSection .leftSection {
+  height: 100%;
+  width: 50%;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  padding: 64px;
+  padding-top: 32px;
+}
+
+main .descriptionSection .leftSection h2 {
+  padding-bottom: 10px;
+}
+
+main .descriptionSection .leftSection h3 {
+  padding-bottom: 36px;
+}
+
+main .descriptionSection .leftSection .searchBlock {
+  height: 150px;
+  width: 100%;
+
+  border: 2px solid var(--red);
+  background-color: var(--red);
+  border-radius: 5px;
+}
+
+
+
+main .descriptionSection .rightSection {
+  height: 100%;
+  width: 50%;
+
+  padding: 32px;
+  padding-right: 64px;
+}
+
+main .descriptionSection .rightSection img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
