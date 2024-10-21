@@ -6,7 +6,10 @@ import {
   writeData,
   fetchTeamData,
   filterByName,
-  searchByKey,
+  BATeamInfoByKey,
+  SBTeamInfoByNum,
+  FRCTeamInfoByNum,
+  start,
 } from './utils.js';
 import cron from 'node-cron';
 
@@ -15,14 +18,12 @@ dotenv.config();
 const PORT = process.env.PORT || 3001;
 const app = start();
 
-const API_KEY = process.env.TBA_KEY;
-
 // endpoints - not needed right now
 //using bluealliance TBA API v3 - get a specific team using team key
 app.get('/team/:team_key', async (req, res) => {
   const teamKey = req.params.team_key;
 
- res.json(await searchByKey(teamKey));
+ res.json(await FRCTeamInfoByNum(teamKey));
 });
 
 //using bluealliance TBA API v3 - stores and gets name, number, city, and country of all teams

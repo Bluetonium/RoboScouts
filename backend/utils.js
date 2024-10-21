@@ -1,13 +1,14 @@
+import express from 'express';
 import "dotenv/config";
 import fs from "fs";
 import axios from 'axios';
 
 const path = "./data.json";
 const API_KEY = process.env.TBA_KEY;
+const FRC_KEY = process.env.FRC_KEY;
 
 export function start(){
   const server = express();
-
   return server;
 }
 
@@ -91,8 +92,8 @@ export async function filterByName(str, pageLen, pageNum){
   return page;
 }
 
-//fetches team info using the team key
-export async function searchByKey(teamKey){
+//fetches team info from Blue Alliance using the team key
+export async function BATeamInfoByKey(teamKey){
   try {
     const response = await axios.get(`https://www.thebluealliance.com/api/v3/team/${teamKey}`, {
       headers: {
@@ -106,5 +107,37 @@ export async function searchByKey(teamKey){
     console.error('Error fetching data from TBA API:', error);
     console.log(teamKey);
     res.status(500).json({ error: 'An error occurred while fetching data from TBA.' });
+  }
+}
+
+//fetches team info from Statbotics using the team key
+export async function SBTeamInfoByNum(teamNum){
+  try {
+    const response = await axios.get(`https://api.statbotics.io/v3/team/${teamNum}`, {
+    });
+    
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching data from Statbotics API:', error);
+    console.log(teamNum);
+    res.status(500).json({ error: 'An error occurred while fetching data from Statbotics.' });
+  }
+}
+
+//fetches team info from FRC API using the team key
+export async function FRCTeamInfoByNum(teamNum){
+  try {
+    const response = await axios.get(`https://frc-api.firstinspires.org/v3.0/2023/teams?teamNumber=${teamNum}`, {
+      headers: {
+        'Authorization': `Basic ${FRC_KEY}`,
+        'Accept': 'application/json',
+      },
+    });
+    
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching data from FRC API', error);
+    console.log(teamNum);
+    res.status(500).json({ error: 'An error occurred while fetching data from FRC.' });
   }
 }
