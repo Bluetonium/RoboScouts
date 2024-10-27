@@ -6,9 +6,10 @@ import {
   writeData,
   fetchTeamData,
   filterByName,
-  BATeamInfoByKey,
-  SBTeamInfoByNum,
-  FRCTeamInfoByNum,
+  BATeamInfo,
+  SBTeamInfo,
+  FRCTeamInfo,
+  AllTeamInfo,
   start,
 } from './utils.js';
 import cron from 'node-cron';
@@ -18,12 +19,30 @@ dotenv.config();
 const PORT = process.env.PORT || 3001;
 const app = start();
 
-// endpoints - not needed right now
+// endpoints
 //using bluealliance TBA API v3 - get a specific team using team key
-app.get('/team/:team_key', async (req, res) => {
-  const teamKey = req.params.team_key;
+app.get('/ba-team-info/:teamNum', async (req, res) => {
+  const teamNum = req.params.teamNum;
 
- res.json(await FRCTeamInfoByNum(teamKey));
+ res.json(await BATeamInfo(teamNum));
+});
+
+app.get('/frc-team-info/:teamNum', async (req, res) => {
+  const teamNum = req.params.teamNum;
+
+ res.json(await FRCTeamInfo(teamNum));
+});
+
+app.get('/sb-team-info/:teamNum', async (req, res) => {
+  const teamNum = req.params.teamNum;
+
+ res.json(await SBTeamInfo(teamNum));
+});
+
+app.get('/all-team-info/:teamNum', async (req, res) => {
+  const teamNum = req.params.teamNum;
+
+ res.json(await AllTeamInfo(teamNum));
 });
 
 //using bluealliance TBA API v3 - stores and gets name, number, city, and country of all teams
@@ -42,7 +61,6 @@ cron.schedule(
 
 //testing
 // console.log(filterByName("a", 20, 2));
-// console.log(await searchByKey("frc254"));
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);

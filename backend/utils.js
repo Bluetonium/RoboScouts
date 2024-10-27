@@ -92,8 +92,9 @@ export async function filterByName(str, pageLen, pageNum){
   return page;
 }
 
-//fetches team info from Blue Alliance using the team key
-export async function BATeamInfoByKey(teamKey){
+//fetches team info from Blue Alliance using the team num
+export async function BATeamInfo(teamNum){
+  const teamKey = "frc" + teamNum;
   try {
     const response = await axios.get(`https://www.thebluealliance.com/api/v3/team/${teamKey}`, {
       headers: {
@@ -110,22 +111,8 @@ export async function BATeamInfoByKey(teamKey){
   }
 }
 
-//fetches team info from Statbotics using the team key
-export async function SBTeamInfoByNum(teamNum){
-  try {
-    const response = await axios.get(`https://api.statbotics.io/v3/team/${teamNum}`, {
-    });
-    
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching data from Statbotics API:', error);
-    console.log(teamNum);
-    res.status(500).json({ error: 'An error occurred while fetching data from Statbotics.' });
-  }
-}
-
-//fetches team info from FRC API using the team key
-export async function FRCTeamInfoByNum(teamNum){
+//fetches team info from FRC API using the team num
+export async function FRCTeamInfo(teamNum){
   try {
     const response = await axios.get(`https://frc-api.firstinspires.org/v3.0/2023/teams?teamNumber=${teamNum}`, {
       headers: {
@@ -139,5 +126,102 @@ export async function FRCTeamInfoByNum(teamNum){
     console.error('Error fetching data from FRC API', error);
     console.log(teamNum);
     res.status(500).json({ error: 'An error occurred while fetching data from FRC.' });
+  }
+}
+
+//fetches team info from Statbotics using the team num
+export async function SBTeamInfo(teamNum){
+  try {
+    const response = await axios.get(`https://api.statbotics.io/v3/team/${teamNum}`, {
+    });
+    
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching data from Statbotics API:', error);
+    console.log(teamNum);
+    res.status(500).json({ error: 'An error occurred while fetching data from Statbotics.' });
+  }
+}
+
+//get team info from all 3 sources; TO-DO: fix error with robotName, homeCMP, and website fields not showing up
+export async function AllTeamInfo(teamNum){
+  const teamKey = "frc" + teamNum;
+  var BAResponse;
+  var FRCResponse;
+  var SBResponse;
+  var response;
+
+  try {
+    BAResponse = await axios.get(`https://www.thebluealliance.com/api/v3/team/${teamKey}`, {
+      headers: {
+        'X-TBA-Auth-Key': API_KEY,
+        'Content-Type': 'application/json',
+      },
+    });
+    FRCResponse = await axios.get(`https://frc-api.firstinspires.org/v3.0/2023/teams?teamNumber=${teamNum}`, {
+      headers: {
+        'Authorization': `Basic ${FRC_KEY}`,
+        'Accept': 'application/json',
+      },
+    });
+    SBResponse = await axios.get(`https://api.statbotics.io/v3/team/${teamNum}`, {
+    });
+
+    response = {
+      nameFull: BAResponse.data.name || FRCResponse.data.teams[0].name,
+      nameShort: BAResponse.data.nickname || FRCResponse.data.teams[0].nameShort,
+      teamNumber: BAResponse.data.team_number || FRCResponse.data.teams[0].teamNumber,
+      rookieYear: BAResponse.data.rookie_year || FRCResponse.data.teams[0].rookieYear,
+      city: BAResponse.data.city || FRCResponse.data.teams[0].city,
+      state: BAResponse.data.state_prov || FRCResponse.data.teams[0].stateProv || SBResponse.data.state,
+      country: BAResponse.data.country || FRCResponse.data.teams[0].country || SBResponse.data.country,
+      district: FRCResponse.data.districtCode || SBResponse.data.district,
+      schoolName: BAResponse.data.school_name || FRCResponse.data.schoolName,
+      postalCode: BAResponse.data.postal_code,
+      address: BAResponse.data.address,
+      gmapsPlaceID: BAResponse.data.gmaps_place_id,
+      gmapsURL: BAResponse.data.gmaps_url,
+      lat: BAResponse.data.lat,
+      lng: BAResponse.data.lng,
+      locationName: BAResponse.data.location_name,
+      offseason: SBResponse.data.offseason,
+      active: SBResponse.data.active,
+      robotName: FRCResponse.data.robotName,
+      motto: BAResponse.data.motto,
+      homeCMP: FRCResponse.data.homeCMP,
+      website: BAResponse.data.website || FRCResponse.data.website,
+      colors: {
+        primary: SBResponse.data.colors.primary,
+        secondary: SBResponse.data.colors.secondary,
+      },
+      record: {
+        season: {
+          wins: SBResponse.data.record.season.wins,
+          losses: SBResponse.data.record.season.losses,
+          ties: SBResponse.data.record.season.ties,
+          count: SBResponse.data.record.season.count,
+          winrate: SBResponse.data.record.season.winrate,
+        },
+        full: {
+          wins: SBResponse.data.record.full.wins,
+          losses: SBResponse.data.record.full.losses,
+          ties: SBResponse.data.record.full.ties,
+          count: SBResponse.data.record.full.count,
+          winrate: SBResponse.data.record.full.winrate,
+        }
+      },
+      normEPA: {
+        current: SBResponse.data.norm_epa.current,
+        recent: SBResponse.data.norm_epa.recent,
+        mean: SBResponse.data.norm_epa.mean,
+        max: SBResponse.data.norm_epa.max,
+      }
+    }
+    
+    return await response;
+  } catch (error) {
+    console.error('Error fetching data.', error);
+    console.log(teamNum);
+    return "Error fetching data.";
   }
 }
