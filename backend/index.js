@@ -1,62 +1,82 @@
 import express from 'express';
 import axios from 'axios';
 import dotenv from 'dotenv';
-import {
-  readData,
-  writeData,
-  fetchTeamData,
-  filterByName,
-  BATeamInfo,
-  SBTeamInfo,
-  FRCTeamInfo,
-  AllTeamInfo,
-  start,
-} from './utils.js';
+// import {
+//   readData,
+//   writeData,
+//   fetchTeamData,
+//   filterByName,
+//   BATeamInfo,
+//   SBTeamInfo,
+//   FRCTeamInfo,
+//   AllTeamInfo,
+//   start,
+//   findNameByNum,
+
+// } from './utils.js';
+import * as utils from './utils.js';
 import cron from 'node-cron';
 
 dotenv.config();
 
 const PORT = process.env.PORT || 3001;
-const app = start();
+const app = utils.start();
 
 // endpoints
-//using bluealliance TBA API v3 - get a specific team using team key
+//find team name using team number
+app.get('/teamName/:teamNum', async (req, res) => {
+  const teamNum = req.params.teamNum;
+
+ res.json(await utils.findNameByNum(teamNum));
+});
+
+//find team number using team name
+app.get('/teamNum/:teamName', async (req, res) => {
+  const teamName = req.params.teamName;
+
+ res.json(await utils.findNumByName(teamName));
+});
+
+//using bluealliance TBA API v3 - get team info using num
 app.get('/ba-team-info/:teamNum', async (req, res) => {
   const teamNum = req.params.teamNum;
 
- res.json(await BATeamInfo(teamNum));
+ res.json(await utils.BATeamInfo(teamNum));
 });
 
+//using First Robotics' FRC API - get team info using num
 app.get('/frc-team-info/:teamNum', async (req, res) => {
   const teamNum = req.params.teamNum;
 
- res.json(await FRCTeamInfo(teamNum));
+ res.json(await utils.FRCTeamInfo(teamNum));
 });
 
+//using StatBotics REST API - get team info using num
 app.get('/sb-team-info/:teamNum', async (req, res) => {
   const teamNum = req.params.teamNum;
 
- res.json(await SBTeamInfo(teamNum));
+ res.json(await utils.SBTeamInfo(teamNum));
 });
 
+//using all 3 APIs - get team info using num
 app.get('/all-team-info/:teamNum', async (req, res) => {
   const teamNum = req.params.teamNum;
 
- res.json(await AllTeamInfo(teamNum));
+ res.json(await utils.AllTeamInfo(teamNum));
 });
 
 //using bluealliance TBA API v3 - stores and gets name, number, city, and country of all teams
 app.get('/teams', async (req, res) => {
     // const pageNum = req.params.page;
-    await fetchTeamData();
-    res.json(readData());
+    await utils.fetchTeamData();
+    res.json(utils.readData());
 });
 
 cron.schedule(
   "0 0 * * *",
   async () => {
     console.log("[RoboScouts] - List Updated!");
-    fetchTeamData();
+    utils.fetchTeamData();
   });
 
 //testing

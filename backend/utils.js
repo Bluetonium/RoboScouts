@@ -92,6 +92,32 @@ export async function filterByName(str, pageLen, pageNum){
   return page;
 }
 
+//get team name by num
+export async function findNameByNum(teamNum){
+  const data = readData();
+
+  for(var i = 0; i < data.length; i++){
+    if(data[i].number == teamNum){
+      return data[i].name;
+    }
+  }
+
+  return null;
+}
+
+//get team num by name
+export async function findNumByName(teamName){
+  const data = readData();
+
+  for(var i = 0; i < data.length; i++){
+    if(data[i].name.replace(/\s+/g, '').toLowerCase() == teamName.replace(/\s+/g, '').toLowerCase()){
+      return data[i].number;
+    }
+  }
+
+  return null;
+}
+
 //fetches team info from Blue Alliance using the team num
 export async function BATeamInfo(teamNum){
   const teamKey = "frc" + teamNum;
