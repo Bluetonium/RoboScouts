@@ -1,19 +1,6 @@
 import express from 'express';
 import axios from 'axios';
 import dotenv from 'dotenv';
-// import {
-//   readData,
-//   writeData,
-//   fetchTeamData,
-//   filterByName,
-//   BATeamInfo,
-//   SBTeamInfo,
-//   FRCTeamInfo,
-//   AllTeamInfo,
-//   start,
-//   findNameByNum,
-
-// } from './utils.js';
 import * as utils from './utils.js';
 import cron from 'node-cron';
 
@@ -75,8 +62,8 @@ app.get('/teams', async (req, res) => {
 cron.schedule(
   "0 0 * * *",
   async () => {
-    console.log("[RoboScouts] - List Updated!");
     utils.fetchTeamData();
+    utils.createAllTeamFiles();
   });
 
 //testing

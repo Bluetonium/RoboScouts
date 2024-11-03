@@ -35,6 +35,63 @@ export function writeData(d) {
   }
 }
 
+//gets a random integer between 0-max
+function getRandomInt(max) {
+  return Math.floor(Math.random() * (max+1));
+}
+
+export function createAllTeamFiles(){
+  try {
+    var teamsAdded = [];
+    const data = readData();
+    for(var i = 0; i < data.length; i++){
+      var path = `./teamData/${data[i].number}.json`;
+      if (!fs.existsSync(path)) {
+        teamsAdded.push(data[i].number);
+        fs.writeFileSync(path, JSON.stringify({ randomColor: [getRandomInt(255), getRandomInt(255), getRandomInt(255)]}, null, 2));
+      }
+    }
+    console.log(`[RoboScouts] - Team Files Added: ${teamsAdded}`);
+  } catch (error) {
+    console.error("Error creating files:", error);
+  }
+}
+
+export function createTeamFile(teamNum){
+  try {
+    var path = `./teamData/${teamNum}.json`;
+    if (!fs.existsSync(path)) {
+      fs.writeFileSync(path, JSON.stringify({ randomColor: [getRandomInt(255), getRandomInt(255), getRandomInt(255)]}, null, 2));
+      console.log(`[RoboScouts] - Team File Added: ${teamNum}`);
+    }
+  } catch (error) {
+    console.error("Error creating file:", error);
+  }
+}
+
+export function deleteAllTeamFiles(){
+  const data = readData();
+  for(var i = 0; i < data.length; i++){
+    var path = `./teamData/${data[i].number}.json`;
+    if (fs.existsSync(path)) {
+      fs.unlink(path, (err) => {
+        if(err) console.error(`Error deleting file ${teamNum}:`, err);
+      });
+    }
+  }
+  console.log(`[RoboScouts] - All Team Files Deleted!`);
+}
+
+export function deleteTeamFile(teamNum){
+  var path = `./teamData/${teamNum}.json`;
+  if (fs.existsSync(path)) {
+    fs.unlink(path, (err) => {
+      if(err) console.error(`Error deleting file ${teamNum}:`, err);
+      else console.log(`[RoboScouts] - Team File Deleted: ${teamNum}`);
+    });
+  }
+}
+
 //fetches team name, number, city, and country from all frc teams and stores it in data.json
 export async function fetchTeamData(){
   let page = 0;
@@ -68,6 +125,7 @@ export async function fetchTeamData(){
           page++;
       }
       writeData(allTeams);
+      console.log("[RoboScouts] - Team List Updated!");
   } catch (error) {
     console.error('Error fetching data from TBA API:', error);
     // res.status(500).json({ error: 'An error occurred while fetching data from TBA.' });
