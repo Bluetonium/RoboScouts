@@ -1,0 +1,134 @@
+.mobileNavigation {
+  position: fixed;
+  height: 100lvh;
+  width: 300px;
+
+  top: 0px;
+  left: -400px;
+
+  z-index: 979;
+
+  background-color: var(--background);
+
+  border-radius: 5px;
+
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.3);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding-top: 72px;
+
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+@keyframes fadeOut {
+  0% {
+    left: 0px;
+  }
+  100% {
+    left: -400px;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    left: -400px;
+  }
+  100% {
+    left: 0px;
+  }
+}
+
+.fadeOut {
+    animation: fadeOut 0.15s ease-out forwards;
+}
+
+.fadeIn {
+  animation: fadeIn 0.15s ease-in forwards;
+}
+
+.navigationLinks {
+  height: auto;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+.navigationSection {
+  height: auto;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.navigationHeader {
+  height: auto;
+  width: 100%;
+
+  position: relative;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: var(--background);
+
+  padding: 8px 16px;
+
+  border-bottom: 3px solid var(--text);
+
+  cursor: pointer;
+
+  transition: 0.05s ease-in;
+}
+
+.navigationHeader:hover {
+  background-color: #e0e0e0;
+}
+
+.navigationHeaderText {
+  transition: 0.05s ease-in;
+  text-wrap: nowrap;
+}
+
+.navigationHeaderImage {
+  height: 32px;
+  aspect-ratio: 1;
+
+  object-fit: cover;
+
+  transform: rotate(180deg);
+  transition: 0.1s ease-in;
+}
+
+.dark {
+  transition: 0.1s ease-in;
+  background-color: var(--text);
+}
+
+.dark .navigationHeaderImage {
+  filter: invert(93%);
+  transform: rotate(270deg);
+}
+
+.dark .navigationHeaderText {
+  transition: 0.1s ease-in;
+  color: var(--background);
+}
+
+.dark:hover {
+  background-color: var(--text);
+}
+
+.light {
+  background-color: var(--background);
+}

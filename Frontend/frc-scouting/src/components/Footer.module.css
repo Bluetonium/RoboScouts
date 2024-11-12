@@ -90,3 +90,20 @@ footer .bottomSection .leftSection {
     width: auto;
     text-decoration: none;
 }
+
+@media (max-width: 600px) {
+    footer .topSection {
+        padding: 32px;
+    }
+
+    footer .bottomSection {
+        padding: 32px;
+    }
+
+    footer .bottomSection .leftSection {
+        max-width: 60%;
+    
+        padding: 0px;
+        padding-left: 0px;
+    }
+}

@@ -17,6 +17,8 @@ a {
     flex-direction: row;
   
     z-index: 1000;
+
+    border-bottom: 1px solid #0000002e;
 }
   
 .headerLeftSection {
@@ -44,22 +46,35 @@ a {
 }
   
 .headerLeftSection h2 {
-    margin-right: 40px;
+    margin-right: 32px;
     font-weight: 500;
   
     cursor: pointer;
 }
   
 .headerLeftSection h3 {
-    margin-right: 32px;
+    margin-right: 16px;
   
     cursor: pointer;
   
     transition: 0.1s ease-in;
 }
+
+.menuImage {
+    display: none;
+
+    position: relative;
+
+    height: 48px;
+    aspect-ratio: 1;
   
-.headerLeftSection h3:hover {
-    color: var(--red);
+    cursor: pointer;
+
+    padding: 0px;
+
+    margin-right: 48px;
+
+    object-fit: cover;
 }
   
 .headerRightSection {
@@ -78,4 +93,54 @@ a {
 
 .headerNavBlock {
     display: none;
+}
+
+.accountSquare {
+    position: relative;
+
+    margin-left: 24px;
+    height: 48px;
+    aspect-ratio: 1;
+
+    background: linear-gradient(45deg, blue, purple);
+
+    border-radius: 5px;
+  
+    cursor: pointer;
+
+    padding: 0px;
+}
+
+.accountSquareImg {
+    height: 100%;
+    width: 100%;
+
+    object-fit: cover;
+    border-radius: 4px;
+
+    background-color: var(--background);
+}
+
+@media (max-width: 1200px) {
+    .headerLeftSection .navElement {
+        display: none;
+    }
+
+    .headerLeftSection h2 {
+        display: none;
+    }
+
+    .menuImage {
+        display: block;
+    }
+}
+
+@media (max-width: 600px) {
+    .headerLeftSection {
+        padding-left: 32px;
+    }
+
+    .headerRightSection {
+        padding-right: 32px;
+    }
 }

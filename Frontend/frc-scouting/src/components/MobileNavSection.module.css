@@ -1,0 +1,43 @@
+
+  
+  .navigationBody {
+    width: 100%;
+    height: auto;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    border-bottom: 2px solid var(--text);
+  }
+  
+  .navigationLink {
+    height: auto;
+    width: 100%;
+  
+    padding: 8px 16px;
+    padding-left: 40px;
+  
+    border-bottom: 1px solid var(--text);
+  
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  
+    cursor: pointer;
+    transition: 0.05s ease-in;
+
+    text-wrap: nowrap;
+  }
+  
+  .navigationLink:hover {
+    padding-left: 48px;
+  }
+
+  .link {
+    height: auto;
+    width: 100%;
+    text-decoration: none;
+  }
