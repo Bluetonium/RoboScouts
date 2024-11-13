@@ -10,11 +10,12 @@ import CTAButton from './components/CTAButton';
 import HeaderBar from './components/HeaderBar';
 import LoadingScreen from './components/LoadingScreen';
 import Footer from './components/Footer';
+import Tooltip from './components/Tooltip';
 
 import './App.css';
 
 {/* Give credit to ionicons and the notification video */}
-{/* Moving forwards: Fix loading screen positioning, Tooltips, Cookie notif, Banner notif */}
+{/* Cookie notif, Banner notif */}
 
 function App() {
   const [showLoadingScreen, setShowLoadingScreen] = useState(true);
@@ -26,6 +27,16 @@ function App() {
 
     return () => clearTimeout(timer);
   }, []);
+
+  const [activeTooltip, setActiveTooltip] = useState<number | null>(null); 
+  
+  const handleMouseEnter = (index: number) => { 
+    setActiveTooltip(index); 
+  }; 
+  
+  const handleMouseLeave = () => { 
+    setActiveTooltip(null);
+  };
 
   return (
     <>
@@ -60,8 +71,9 @@ function App() {
             <div className='searchBlock'>
               <div className='topSection'>
                 <div className='searchBar'>
-                  <div className='imgBackground'>
+                  <div className='imgBackground' onMouseEnter={() => handleMouseEnter(1)} onMouseLeave={handleMouseLeave}>
                     <img src={search} className='noSelect'/>
+                    {activeTooltip === 1 && <Tooltip message={"Search"} />}
                   </div>
                   <input className='titleDarkText' placeholder='Type a team name!' type='text'></input>
                 </div>

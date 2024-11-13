@@ -1,0 +1,22 @@
+.tooltip {
+  position: absolute;
+
+  top: calc(100% + 8px);
+  left: -2px;
+
+  z-index: 2000;
+
+  height: auto;
+  width: auto;
+  padding: 2px 8px;
+
+  background-color: var(--text);
+
+  border-radius: 4px;
+
+  cursor: default;
+
+  pointer-events: none;
+
+  color: var(--background) !important;
+}

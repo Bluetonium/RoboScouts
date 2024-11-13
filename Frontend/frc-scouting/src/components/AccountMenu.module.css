@@ -120,3 +120,10 @@
     right: 32px;
   }
 }
+
+.auto {
+  position: relative;
+  display: block;
+  height: 100%;
+  aspect-ratio: 1;
+}
