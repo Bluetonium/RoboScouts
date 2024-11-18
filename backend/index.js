@@ -17,7 +17,7 @@ app.get('/teamName/:teamNum', async (req, res) => {
  res.json(await utils.findNameByNum(teamNum));
 });
 
-//find team number using team name
+//find team number using team name 
 app.get('/teamNum/:teamName', async (req, res) => {
   const teamName = req.params.teamName;
 
@@ -56,7 +56,7 @@ app.get('/all-team-info/:teamNum', async (req, res) => {
 app.get('/teams', async (req, res) => {
     // const pageNum = req.params.page;
     await utils.fetchTeamData();
-    res.json(utils.readData());
+    res.json(utils.readData('./data.json'));
 });
 
 cron.schedule(

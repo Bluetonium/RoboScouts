@@ -3,7 +3,6 @@ import "dotenv/config";
 import fs from "fs";
 import axios from 'axios';
 
-const path = "./data.json";
 const API_KEY = process.env.TBA_KEY;
 const FRC_KEY = process.env.FRC_KEY;
 
@@ -12,43 +11,39 @@ export function start(){
   return server;
 }
 
-//reads data from data.json
-export function readData() {
+//reads data from specified file
+export async function readData(path) {
   try {
-    if (!fs.existsSync(path)) {
-      fs.writeFileSync(path, JSON.stringify({ teams: [] }, null, 2));
-    }
-    const d = fs.readFileSync(path, "utf8");
+    const d = fs.readFile(path, "utf8");
     return JSON.parse(d);
   } catch (error) {
-    console.error("Error reading data:", error);
-    return {};
-  }
+    console.error("Error reading from file: ", error);
+  } 
 }
 
-//writes data to data.json
-export function writeData(d) {
+//writes data to specified file
+export async function writeData(path, d) {
   try {
-    fs.writeFileSync(path, JSON.stringify(d, null, 2), "utf8");
+    await fs.writeFile(path, JSON.stringify(d, null, 2), "utf8");
   } catch (error) {
-    console.error("Error writing data:", error);
+    console.error("Error writing to file: ", error);
   }
 }
 
 //gets a random integer between 0-max
-function getRandomInt(max) {
+async function getRandomInt(max) {
   return Math.floor(Math.random() * (max+1));
 }
 
-export function createAllTeamFiles(){
+export async function createAllTeamFiles(){
   try {
     var teamsAdded = [];
-    const data = readData();
+    const data = await readData('./data.json');
     for(var i = 0; i < data.length; i++){
       var path = `./teamData/${data[i].number}.json`;
       if (!fs.existsSync(path)) {
         teamsAdded.push(data[i].number);
-        fs.writeFileSync(path, JSON.stringify({ randomColor: [getRandomInt(255), getRandomInt(255), getRandomInt(255)]}, null, 2));
+        await writeData(path, { randomColor: [getRandomInt(255), getRandomInt(255), getRandomInt(255)]});
       }
     }
     console.log(`[RoboScouts] - Team Files Added: ${teamsAdded}`);
@@ -57,20 +52,23 @@ export function createAllTeamFiles(){
   }
 }
 
-export function createTeamFile(teamNum){
+export async function createTeamFile(teamNum){
   try {
     var path = `./teamData/${teamNum}.json`;
-    if (!fs.existsSync(path)) {
-      fs.writeFileSync(path, JSON.stringify({ randomColor: [getRandomInt(255), getRandomInt(255), getRandomInt(255)]}, null, 2));
+    try{
+      await fs.promises.access(path);
+      console.log(`[RoboScouts] - File ${teamNum} already exists.`);
+    } catch (error){
+      await writeData(path, { randomColor: [getRandomInt(255), getRandomInt(255), getRandomInt(255)]});
       console.log(`[RoboScouts] - Team File Added: ${teamNum}`);
     }
   } catch (error) {
-    console.error("Error creating file:", error);
+    console.error("[RoboScouts] - Error creating file:", error);
   }
 }
 
 export function deleteAllTeamFiles(){
-  const data = readData();
+  const data = readData('./data.json');
   for(var i = 0; i < data.length; i++){
     var path = `./teamData/${data[i].number}.json`;
     if (fs.existsSync(path)) {
@@ -89,6 +87,47 @@ export function deleteTeamFile(teamNum){
       if(err) console.error(`Error deleting file ${teamNum}:`, err);
       else console.log(`[RoboScouts] - Team File Deleted: ${teamNum}`);
     });
+  }
+}
+
+export function editProperty(teamNum, property, newVal){
+  try {
+    var data = readData(`./teamData/${teamNum}.json`);
+    if(data[property]){
+      var currVal = data[property];
+      if(typeof currVal == typeof newVal){
+        data[property] = newVal;
+      }
+      else {
+        console.log("Invalid data type.");
+      }
+    } else {
+      data[property] = newVal;
+    }
+    writeData(`./teamData/${teamNum}.json`, data);
+    console.log(`${property} edited/added successfully!`);
+  } catch (error) {
+    console.error(`Error editing file ${teamNum}: `, error);
+  }
+}
+
+export function deleteProperty(teamNum, property){
+  try {
+    var data = readData(`./teamData/${teamNum}.json`);
+    delete data[property];
+    writeData(`./teamData/${teamNum}.json`, data);
+    console.log(`${property} deleted successfully!`);
+  } catch {
+    console.error(`Error deleting property ${property}: `, error);
+  }
+}
+
+export function getProperty(teamNum, property){
+  try {
+    var data = readData(`./teamData/${teamNum}.json`);
+    return data[property] || `${property} does not exist.`;
+  } catch {
+    console.error(`Error getting property ${property}: `, error);
   }
 }
 
@@ -124,7 +163,7 @@ export async function fetchTeamData(){
           allTeams = allTeams.concat(fTeams);
           page++;
       }
-      writeData(allTeams);
+      writeData('./data.json', allTeams);
       console.log("[RoboScouts] - Team List Updated!");
   } catch (error) {
     console.error('Error fetching data from TBA API:', error);
@@ -134,7 +173,7 @@ export async function fetchTeamData(){
 
 //filters teams by name
 export async function filterByName(str, pageLen, pageNum){
-  const data = readData();
+  const data = readData('./data.json');
   var matchCount = 0;
   var page = [];
 
@@ -152,7 +191,7 @@ export async function filterByName(str, pageLen, pageNum){
 
 //get team name by num
 export async function findNameByNum(teamNum){
-  const data = readData();
+  const data = readData('./data.json');
 
   for(var i = 0; i < data.length; i++){
     if(data[i].number == teamNum){
@@ -165,7 +204,7 @@ export async function findNameByNum(teamNum){
 
 //get team num by name
 export async function findNumByName(teamName){
-  const data = readData();
+  const data = readData('./data.json');
 
   for(var i = 0; i < data.length; i++){
     if(data[i].name.replace(/\s+/g, '').toLowerCase() == teamName.replace(/\s+/g, '').toLowerCase()){
