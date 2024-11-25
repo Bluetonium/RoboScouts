@@ -1,10 +1,19 @@
 import express from 'express';
 import "dotenv/config";
-import fs from "fs";
+import { promises as fs } from 'fs';
 import axios from 'axios';
+import mysql from 'mysql2/promise';
+import Joi from 'joi';
 
 const API_KEY = process.env.TBA_KEY;
 const FRC_KEY = process.env.FRC_KEY;
+
+const DBconfig = {
+  host: 'localhost',    // Your MySQL server hostname
+  user: 'root',         // Your MySQL username
+  password: 'FHSroboscouts2024$root', // Your MySQL password
+  database: 'roboscouts'   // Your database name
+};
 
 export function start(){
   const server = express();
@@ -14,7 +23,7 @@ export function start(){
 //reads data from specified file
 export async function readData(path) {
   try {
-    const d = fs.readFile(path, "utf8");
+    const d = await fs.readFile(path, "utf8");
     return JSON.parse(d);
   } catch (error) {
     console.error("Error reading from file: ", error);
@@ -30,189 +39,215 @@ export async function writeData(path, d) {
   }
 }
 
-//gets a random integer between 0-max
-async function getRandomInt(max) {
-  return Math.floor(Math.random() * (max+1));
-}
-
-export async function createAllTeamFiles(){
+//uses BlueAlliance to get the name, number, city, and country from each team and store it in a table
+export async function addAllBasicTeamData(){
   try {
-    var teamsAdded = [];
-    const data = await readData('./data.json');
-    for(var i = 0; i < data.length; i++){
-      var path = `./teamData/${data[i].number}.json`;
-      if (!fs.existsSync(path)) {
-        teamsAdded.push(data[i].number);
-        await writeData(path, { randomColor: [getRandomInt(255), getRandomInt(255), getRandomInt(255)]});
-      }
-    }
-    console.log(`[RoboScouts] - Team Files Added: ${teamsAdded}`);
-  } catch (error) {
-    console.error("Error creating files:", error);
-  }
-}
-
-export async function createTeamFile(teamNum){
-  try {
-    var path = `./teamData/${teamNum}.json`;
-    try{
-      await fs.promises.access(path);
-      console.log(`[RoboScouts] - File ${teamNum} already exists.`);
-    } catch (error){
-      await writeData(path, { randomColor: [getRandomInt(255), getRandomInt(255), getRandomInt(255)]});
-      console.log(`[RoboScouts] - Team File Added: ${teamNum}`);
-    }
-  } catch (error) {
-    console.error("[RoboScouts] - Error creating file:", error);
-  }
-}
-
-export function deleteAllTeamFiles(){
-  const data = readData('./data.json');
-  for(var i = 0; i < data.length; i++){
-    var path = `./teamData/${data[i].number}.json`;
-    if (fs.existsSync(path)) {
-      fs.unlink(path, (err) => {
-        if(err) console.error(`Error deleting file ${teamNum}:`, err);
+    const connection = await mysql.createConnection(DBconfig);
+  
+    let page = 0;
+    let moreTeams = true;
+    
+    while(moreTeams){
+      const response = await axios.get(`https://www.thebluealliance.com/api/v3/teams/${page}/simple`, {
+      headers: {
+          'X-TBA-Auth-Key': API_KEY,
+          'Content-Type': 'application/json',
+      },
       });
+
+      if (response.data.length == 0) {
+        moreTeams = false;
+        break;
+      }
+        
+      response.data.forEach(team => {
+        connection.execute('INSERT INTO basic_team_data (number, name, city, country) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE name = VALUES(name), country = VALUES(country), city = VALUES(city);', [team.team_number, team.nickname, team.city, team.country]);
+      });
+
+      page++;
     }
-  }
-  console.log(`[RoboScouts] - All Team Files Deleted!`);
-}
-
-export function deleteTeamFile(teamNum){
-  var path = `./teamData/${teamNum}.json`;
-  if (fs.existsSync(path)) {
-    fs.unlink(path, (err) => {
-      if(err) console.error(`Error deleting file ${teamNum}:`, err);
-      else console.log(`[RoboScouts] - Team File Deleted: ${teamNum}`);
-    });
-  }
-}
-
-export function editProperty(teamNum, property, newVal){
-  try {
-    var data = readData(`./teamData/${teamNum}.json`);
-    if(data[property]){
-      var currVal = data[property];
-      if(typeof currVal == typeof newVal){
-        data[property] = newVal;
-      }
-      else {
-        console.log("Invalid data type.");
-      }
-    } else {
-      data[property] = newVal;
-    }
-    writeData(`./teamData/${teamNum}.json`, data);
-    console.log(`${property} edited/added successfully!`);
-  } catch (error) {
-    console.error(`Error editing file ${teamNum}: `, error);
-  }
-}
-
-export function deleteProperty(teamNum, property){
-  try {
-    var data = readData(`./teamData/${teamNum}.json`);
-    delete data[property];
-    writeData(`./teamData/${teamNum}.json`, data);
-    console.log(`${property} deleted successfully!`);
-  } catch {
-    console.error(`Error deleting property ${property}: `, error);
-  }
-}
-
-export function getProperty(teamNum, property){
-  try {
-    var data = readData(`./teamData/${teamNum}.json`);
-    return data[property] || `${property} does not exist.`;
-  } catch {
-    console.error(`Error getting property ${property}: `, error);
-  }
-}
-
-//fetches team name, number, city, and country from all frc teams and stores it in data.json
-export async function fetchTeamData(){
-  let page = 0;
-  let moreTeams = true;
-  var allTeams = [];
-
-  try {
-      while(moreTeams){
-          const response = await axios.get(`https://www.thebluealliance.com/api/v3/teams/${page}/simple`, {
-          headers: {
-              'X-TBA-Auth-Key': API_KEY,
-              'Content-Type': 'application/json',
-          },
-          });
-          
-          const teamInfo = response.data;
-
-          if (teamInfo.length === 0) {
-              moreTeams = false;
-              break;
-          }
-          
-          const fTeams = teamInfo.map(team => ({
-          name: team.nickname,
-          number: team.team_number,
-          country: team.country,
-          city: team.city,
-          }));
-
-          allTeams = allTeams.concat(fTeams);
-          page++;
-      }
-      writeData('./data.json', allTeams);
       console.log("[RoboScouts] - Team List Updated!");
+      await connection.end();
   } catch (error) {
     console.error('Error fetching data from TBA API:', error);
     // res.status(500).json({ error: 'An error occurred while fetching data from TBA.' });
   }
 }
 
+//gets a random integer between 0-max
+async function getRandomInt(max) {
+  return Math.floor(Math.random() * (max+1));
+}
+
+//uses the basic_team_data table to fill the team_data table
+export async function addAllTeamData(){
+  try {
+    const connection = await mysql.createConnection(DBconfig);
+    var teamsAdded = [];
+    const [rows] = await connection.execute("SELECT * FROM basic_team_data");
+    for(var i = 0; i < rows.length; i++){
+        // teamsAdded.push(rows[i].number);
+        await connection.execute("INSERT IGNORE INTO team_data (number, bg_color) VALUES (?, ?)", [rows[i].number, "#"+(await getRandomInt(16777215)).toString(16).padStart(6, '0')]);
+    }
+    connection.end();
+    console.log(`[RoboScouts] - Team Files Added: ${teamsAdded}`);
+  } catch (error) {
+    console.error("Error creating files:", error);
+  }
+}
+
+export async function addTeamData(teamNum){
+  try{
+    const connection = await mysql.createConnection(DBconfig);
+    const [rows] = await connection.execute(`SELECT COUNT(*) AS count FROM team_data WHERE number = ?`, [teamNum]);
+    if(rows[0].count == 0){
+      await connection.execute("INSERT IGNORE INTO team_data (number, bg_color) VALUES (?, ?)", [teamNum, "#"+(await getRandomInt(16777215)).toString(16).padStart(6, '0')]);
+      console.log(`[RoboScouts] - Team File Added: ${teamNum}`);
+    } else {
+      console.log(`[RoboScouts] - File ${teamNum} already exists.`);
+    }
+    connection.end();
+  } catch (err){
+    console.error(`Error adding team ${teamNum} to team_data: `, err);
+  }
+}
+
+export async function deleteAllTeamData(){
+  try {
+    const connection = await mysql.createConnection(DBconfig);
+    await connection.execute(`TRUNCATE TABLE team_data`);
+    console.log(`[RoboScouts] - All Team Files Deleted!`);
+    connection.end();
+  } catch (err) {
+    console.error(`Error deleting all team data: `, err);
+  }
+}
+
+export async function deleteTeamData(teamNum){
+  try {
+    const connection = await mysql.createConnection(DBconfig);
+    await connection.execute(`DELETE FROM team_data WHERE number = ?`, [teamNum]);
+    console.log(`[RoboScouts] - Team ${teamNum} Deleted!`);
+    connection.end();
+  } catch (err) {
+    console.error(`Error deleting team ${teamNum}:`, err);
+  }
+}
+
+export async function editProperty(teamNum, property, newVal){
+  try {
+    const connection = await mysql.createConnection(DBconfig);
+    const [rows] = await connection.execute(`SELECT * FROM team_data WHERE number = ?`, [teamNum]);
+    if(rows.length > 0){
+      const schemas = {
+        number: Joi.number().required(),
+        bg_color: Joi.string().regex(/^#[0-9A-Fa-f]{6}$/).required(),
+      };
+
+      const schema = schemas[property];
+
+      if(schema){
+        const valid = schema.validate(newVal);
+        if(valid){
+          await connection.execute(`UPDATE team_data SET ${property} = ? WHERE number = ?`, [newVal, teamNum]);
+          console.log(`${property} edited successfully!`);
+        } else {
+          console.error(`New value invalid. Edit property ${property} failed.`);
+        }
+      } else {
+        console.error(`Property ${property} not found.`);
+      }
+    } else {
+      console.error(`Team ${teamNum} not found.`);
+    }
+    connection.end();
+  } catch (err) {
+    console.error(`Error editing file ${teamNum}: `, err);
+  }
+}
+
+export async function deleteProperty(teamNum, property){
+  try {
+    const connection = await mysql.createConnection(DBconfig);
+    const [columns] = await connection.execute(`SHOW COLUMNS FROM team_data WHERE Field = ?`, [property]);
+    if(columns.length > 0){
+      if(columns[0].Null == 'YES'){
+        const [result] = await connection.execute(`UPDATE team_data SET ${property} = NULL WHERE number = ?`, [teamNum]);
+        if(result > 0){
+          console.log(`Property ${property} deleted successfully!`);
+        } else {
+          console.error(`Team ${teamNum} not found.`);
+        }
+      } else {
+        console.error(`Property ${property} cannot be null.`);
+      }
+    } else {
+      console.error(`Property ${property} not found.`);
+    }
+    connection.end();
+  } catch (err) {
+    console.error(`Error deleting property ${property}: `, err);
+  }
+}
+
+export async function getProperty(teamNum, property){
+  try {
+    const connection = await mysql.createConnection(DBconfig);
+    const [rows] = await connection.execute(`SELECT ${property} FROM team_data WHERE number = ?`, [teamNum]);
+    if(rows.length > 0){
+      return rows[0][property];
+    } else {
+      console.error(`Could not find property ${property} from team ${teamNum}`);
+    }
+    connection.end();
+  } catch (err) {
+    console.error(`Error getting property ${property}: `, err);
+  }
+}
+
 //filters teams by name
 export async function filterByName(str, pageLen, pageNum){
-  const data = readData('./data.json');
-  var matchCount = 0;
-  var page = [];
+  try{
+    const connection = await mysql.createConnection(DBconfig);
+    const [rows] = await connection.execute(`SELECT * FROM basic_team_data WHERE LOWER(name) LIKE LOWER(CONCAT('%', ?, '%'))`, [str]);
+    connection.end();
+    var matchCount = 0;
+    var page = [];
 
-  for(var i = 0; i < data.length; i++){
-    if(data[i].name.toLowerCase().includes(str)){
-      matchCount++;
-      if(matchCount > (pageNum-1)*pageLen && matchCount <= pageNum*pageLen){
-        page.push(data[i]);
-      }
+    for(var i = (pageNum-1)*pageLen; i < pageNum*pageLen; i++){
+        page.push(rows[i]);
     }
-  }
 
-  return page;
+    return page;
+  } catch (err) {
+    console.error("Filter by name failed:", err);
+  }
 }
 
 //get team name by num
 export async function findNameByNum(teamNum){
-  const data = readData('./data.json');
+  const connection = await mysql.createConnection(DBconfig);
+  const [rows] = await connection.execute(`SELECT name FROM basic_team_data WHERE number = ?`, [teamNum]);
+  connection.end();
 
-  for(var i = 0; i < data.length; i++){
-    if(data[i].number == teamNum){
-      return data[i].name;
-    }
+  if(rows.length > 0){
+    return rows[0].name;
+  } else{
+    return null;
   }
-
-  return null;
 }
 
 //get team num by name
 export async function findNumByName(teamName){
-  const data = readData('./data.json');
+  const connection = await mysql.createConnection(DBconfig);
+  var [rows] = await connection.execute(`SELECT number FROM basic_team_data WHERE LOWER(REPLACE(name, ' ', '')) = LOWER(REPLACE(?, ' ', ''))`, [teamName]);
+  connection.end();
 
-  for(var i = 0; i < data.length; i++){
-    if(data[i].name.replace(/\s+/g, '').toLowerCase() == teamName.replace(/\s+/g, '').toLowerCase()){
-      return data[i].number;
-    }
+  if(rows.length > 0){
+    return rows[0].number;
+  } else{
+    return null;
   }
-
-  return null;
 }
 
 //fetches team info from Blue Alliance using the team num

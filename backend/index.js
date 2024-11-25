@@ -3,6 +3,7 @@ import axios from 'axios';
 import dotenv from 'dotenv';
 import * as utils from './utils.js';
 import cron from 'node-cron';
+import mysql from 'mysql2/promise';
 
 dotenv.config();
 
@@ -11,6 +12,12 @@ const app = utils.start();
 
 // endpoints
 //find team name using team number
+app.get('/filter-names/:string', async (req, res) => {
+  const string = req.params.string;
+
+ res.json(await utils.filterByName(string, 30, 1));
+});
+
 app.get('/teamName/:teamNum', async (req, res) => {
   const teamNum = req.params.teamNum;
 
