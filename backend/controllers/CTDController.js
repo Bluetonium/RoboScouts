@@ -1,7 +1,7 @@
 import "dotenv/config";
 import mysql from 'mysql2/promise';
 import Joi from 'joi';
-import { utils, DBUtils } from '../utils/index.js';
+import { utils } from '../utils/index.js';
 import { CTDModel } from '../models/index.js';
 
 //---------------> Functions that interact with custom_team_data table <---------------
@@ -15,7 +15,7 @@ export async function addTeam(req, res) {
       await CTDModel.insertIgnore({team_number: teamNum, bg_color: "#"+(utils.getRandomInt(16777215)).toString(16).padStart(6, '0')});
       res.status(200).json(`Team added: ${teamNum}`);
     } else {
-      res.status(400).json({ error: `Team ${teamNum} already exists. ` });
+      res.status(400).json({ error: `Team ${teamNum} already exists.` });
     }
   } catch (error){
     utils.errorResponse(res, error, 'addTeam(req, res)');
@@ -28,7 +28,7 @@ export async function getTeam(req, res){
   try {
     const teams = await CTDModel.select(teamNum);
     if(teams) res.status(200).json(teams[0]);
-    else res.status(400).json({ error: `Team ${teamNum} does not exist. ` });
+    else res.status(400).json({ error: `Could not find team ${teamNum}.` });
   } catch (error) {
     utils.errorResponse(res, error, 'getTeam(req, res)');
   }
@@ -52,10 +52,9 @@ export async function editTeam(req, res){
   const data = req.body;
 
   try {
-    if(await DBUtils.teamExists(teamNum)){
-      const result = await CTDModel.update(teamNum, data);
-      res.status(200).json(result);
-    } else res.status(400).json({ error: `Team ${teamNum} does not exist.`});
+    const result = await CTDModel.update(teamNum, data);
+    if(result) res.status(200).json(result);
+    else res.status(400).json({ error: `Could not find team ${teamNum}.`});
   } catch (error) {
     utils.errorResponse(res, error, 'editTeam(req, res)');
   }
@@ -65,10 +64,9 @@ export async function deleteTeam(req, res){
   const teamNum = req.params.teamNum;
 
   try {
-    if(await DBUtils.teamExists(teamNum)){
     const result = await CTDModel.remove(teamNum);
-    res.status(200).json(result);
-    } else res.status(400).json({ error: `Team ${teamNum} does not exist.`});
+    if(result) res.status(200).json(result);
+    else res.status(400).json({ error: `Could not find team ${teamNum}.`});
   } catch (error) {
     utils.errorResponse(res, error, 'deleteTeam(teamNum)');
   }
@@ -76,7 +74,7 @@ export async function deleteTeam(req, res){
 
 // export async function deleteField(teamNum, field){
 //   try {
-//     if(await DBUtils.fieldExists(field)){
+//     if(await utils.fieldExists(field)){
 //       if(field.Null == 'YES'){
 //         const [result] = CTDModel.update(teamNum, field, 'NULL');
 //         if(result > 0){

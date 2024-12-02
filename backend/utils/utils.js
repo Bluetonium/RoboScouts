@@ -1,7 +1,7 @@
 import express from 'express';
 import "dotenv/config";
 import { promises as fs } from 'fs';
-import { BTDModel, CTDModel, DTDModel } from '../models/index.js';
+import { BTDModel } from '../models/index.js';
 
 //---------------> General utility functions <---------------
 
@@ -18,10 +18,19 @@ export function paginate(result, pageNum, pageLen){
   return page;
 }
 
+export async function BATeamExists(teamNum){
+  const result = await BTDModel.select(teamNum);
+  if(result){
+    return true;
+  } else {
+    return false;
+  }
+}
+
 export function errorResponse(res, error, funcName){
   const statusCode = error.response ? error.response.status : 500;
   const clientMessage = getClientError(statusCode);
-  const errorMessage = error.response ? error.response.data : error.message
+  const errorMessage = error.response ? error.response.data : error.message;
 
   console.error(`Error from '${funcName}':`, errorMessage);
   return res.status(statusCode).json({ error: clientMessage });

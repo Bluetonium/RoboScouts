@@ -11,7 +11,7 @@ export const BTDSchema = Joi.object({
 
 export async function upsert(team){
   try {
-    const [result] = await pool.execute('INSERT INTO basic_team_data (team_number, name, city, country) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE name = VALUES(name), country = VALUES(country), city = VALUES(city);', [team.team_number, team.nickname, team.city, team.country]);
+    const [result] = await pool.execute('INSERT INTO basic_team_data (team_number, name, city, country) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE name = VALUES(name), country = VALUES(country), city = VALUES(city)', [team.team_number, team.nickname, team.city, team.country]);
     return result;
   } catch (err) {
     throw err;
@@ -22,8 +22,8 @@ export async function selectAll(){
   try {
     const [result] = await pool.execute('SELECT * FROM basic_team_data');
     return result;
-  } catch (err) {
-    throw err;
+  } catch (error) {
+    throw error;
   }
 }
 
@@ -35,8 +35,8 @@ export async function select(teamNum, field = '*') {
       return null;
     }
     return result;
-  } catch (err) {
-    throw err;
+  } catch (error) {
+    throw error;
   }
 }
 
@@ -47,7 +47,7 @@ export async function selectByName(str){
       return null;
     }
     return result;
-  } catch (err) {
-    throw err;
+  } catch (error) {
+    throw error;
   }
 }

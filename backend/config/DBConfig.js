@@ -7,7 +7,7 @@ const pool = mysql.createPool({
   password: process.env.ROOT_PASSWORD,
   database: 'roboscouts',
   waitForConnections: true,
-  connectionLimit: 5,
+  connectionLimit: 10,
   queueLimit: 0
   });
 

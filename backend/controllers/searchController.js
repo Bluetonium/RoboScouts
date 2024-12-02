@@ -43,7 +43,7 @@ export async function findNameByNum(req, res){
   if(names){
     res.status(200).json(names[0].name);
   } else{
-    res.status(400).json(`Team with the number ${teamNum} could not be found.`);
+    res.status(400).json(`Could not find team with the number ${teamNum}.`);
   }
   } catch (error){
     utils.errorResponse(res, error, 'findNameByNum(req, res)');
@@ -60,7 +60,7 @@ export async function findNumByName(req, res){
     if(result){
       res.status(200).json(result[0].team_number);
     } else{
-      res.status(400).json(`Team with the name ${teamName} could not be found.`);
+      res.status(400).json(`Could not find team with the name ${teamNum}.`);
     }
   } catch (error) {
     utils.errorResponse(res, error, 'findNumByName(req, res)');

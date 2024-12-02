@@ -1,6 +1,6 @@
-import * as apiControl from './apiControl.js';
-import * as CTDControl from './customTDControl.js';
-import * as DTDControl from './detailedTDControl.js';
-import * as searchControl from './searchControl.js';
+import * as APIController from './APIController.js';
+import * as CTDController from './CTDController.js';
+import * as DTDController from './DTDController.js';
+import * as searchController from './searchController.js';
 
-export { apiControl, CTDControl, DTDControl, searchControl };
+export { APIController, CTDController, DTDController, searchController };

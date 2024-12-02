@@ -16,8 +16,8 @@ export async function insertIgnore(data) {
 
     const [result] = await pool.execute(`INSERT IGNORE INTO custom_team_data (${fields.join(', ')}) VALUES (${placeholders})`, values);
     return result;
-  } catch (err) {
-    throw err;
+  } catch (error) {
+    throw error;
   }
 }
 
@@ -29,8 +29,8 @@ export async function select(teamNum, field = '*') {
       return null;
     }
     return result;
-  } catch (err) {
-    throw err;
+  } catch (error) {
+    throw error;
   }
 }
 
@@ -41,30 +41,19 @@ export async function update(teamNum, data) {
     const setClause = fields.map(field => `${field} = ?`).join(', ');
 
     const [result] = await pool.execute(`UPDATE custom_team_data SET ${setClause} WHERE team_number = ?`, [...values, teamNum]);
+    if(result.affectedRows == 0) return null; //teamNum doesn't exist
     return result;
-  } catch (err) {
-    throw err;
+  } catch (error) {
+    throw error;
   }
 }
 
 export async function remove(teamNum){
   try {
     const [result] = await pool.execute(`DELETE FROM custom_team_data WHERE team_number = ?`, [teamNum]);
+    if(result.affectedRows == 0) return null; //teamNum doesn't exist
     return result;
-  } catch (err) {
-    throw err;
+  } catch (error) {
+    throw error;
   }
 }
-
-// export async function fieldExists(field){
-//   try {
-//     const [columns] = await pool.execute(`SHOW COLUMNS FROM custom_team_data WHERE Field = ?`, [field]);
-//     if(columns.length > 0){
-//       return true;
-//     } else {
-//       return false;
-//     }
-//   } catch (err) {
-//     throw err;
-//   }
-// }

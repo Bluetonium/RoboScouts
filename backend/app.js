@@ -1,6 +1,6 @@
 import express from 'express';
 import 'dotenv/config';
-import { utils, DBUtils } from './utils/index.js';
+import { processAPIData } from './services/index.js';
 import cron from 'node-cron';
 import routes from './routes/routes.js';
 
@@ -11,12 +11,23 @@ app.use(express.json());
 
 app.use(`/api`, routes);
 
+//update daily
 cron.schedule(
   "0 0 * * *",
   async () => {
-    DBUtils.addAllBTD();
-    DBUtils.addAllCTD();
-  });
+    processAPIData.addAllBTD();
+    processAPIData.addAllCTD();
+    processAPIData.addAllDTDER();
+  }
+);
+
+//update detailed team data general every sunday
+cron.schedule(
+  "0 0 * * 0",
+  async () => {
+    processAPIData.addAllDTDG();
+  }
+);
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
