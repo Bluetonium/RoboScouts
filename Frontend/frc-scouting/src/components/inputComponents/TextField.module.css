@@ -1,0 +1,30 @@
+.textField {
+    height: auto;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    margin-top: 16px;
+}
+
+.title {
+    margin-right: 32px;
+    flex-shrink: 0;
+
+    width: 33%;
+}
+
+.input {
+    height: 48px;
+    width: 64%;
+    outline: none;
+    background: none;
+
+    padding: 4px 16px;
+
+    border: 2px solid var(--text);
+    border-radius: 10px;
+}

@@ -1,0 +1,649 @@
+:root {
+
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+  
+    line-height: 1.5;
+    font-weight: 400;
+  
+    /*color-scheme: light dark;*/
+  
+    --background: #F7EBEC;
+    --text: #151515;
+    --lightText: #444444;
+    --red: #FF6961;
+    --blue: #4F738E;
+    --lightGray: #dfd6d7;
+  
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+* {
+padding: 0;
+margin: 0;
+box-sizing: border-box;
+
+font-family: inherit;
+font-size: inherit;
+color: inherit;
+}
+
+.slightlyBold {
+    font-weight: 500;
+}
+
+.bodyDarkText {
+font-family: "M PLUS Code Latin", monospace;
+font-optical-sizing: auto;
+font-style: normal;
+
+line-height: 1.40;
+letter-spacing: 0.04em;
+font-size: 1.2em;
+font-weight: 400;
+
+vertical-align: middle;
+
+color: var(--text);
+
+font-synthesis: none;
+text-rendering: optimizeLegibility;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+
+.titleDarkText {
+font-family: "M PLUS Code Latin", monospace;
+font-optical-sizing: auto;
+font-style: normal;
+
+line-height: 1.60;
+letter-spacing: 0.04em;
+font-size: 1.5em;
+font-weight: 400;
+
+vertical-align: middle;
+
+color: var(--text);
+
+font-synthesis: none;
+text-rendering: optimizeLegibility;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+
+.headerDarkText {
+font-family: "M PLUS Code Latin", monospace;
+font-optical-sizing: auto;
+font-style: normal;
+
+line-height: 1.5;
+letter-spacing: 0.04em;
+font-size: 4em;
+font-weight: 400;
+
+vertical-align: middle;
+
+color: var(--text);
+
+font-synthesis: none;
+text-rendering: optimizeLegibility;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+
+.bodyLightText {
+    font-family: "M PLUS Code Latin", monospace;
+    font-optical-sizing: auto;
+    font-style: normal;
+    
+    line-height: 1.40;
+    letter-spacing: 0.04em;
+    font-size: 1.2em;
+    font-weight: 400;
+    
+    vertical-align: middle;
+    
+    color: var(--background);
+    
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    }
+
+.titleLightText {
+    font-family: "M PLUS Code Latin", monospace;
+    font-optical-sizing: auto;
+    font-style: normal;
+    
+    line-height: 1.60;
+    letter-spacing: 0.04em;
+    font-size: 1.5em;
+    font-weight: 400;
+    
+    vertical-align: middle;
+    
+    color: var(--background);
+    
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+    
+.headerLightText {
+    font-family: "M PLUS Code Latin", monospace;
+    font-optical-sizing: auto;
+    font-style: normal;
+    
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    font-size: 4em;
+    font-weight: 400;
+    
+    vertical-align: middle;
+    
+    color: var(--background);
+    
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+.noSelect 
+{
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+}
+
+
+html {
+background-color: var(--background);
+}
+
+main {
+margin-top: 64px;
+}
+
+.teamHero {
+  position: relative;
+  height: 40vh;
+  width: 100%;
+
+  background-color: var(--red);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  padding: 64px;
+}
+
+.teamHero .teamLogo {
+    position: relative;
+    height: 160px;
+    aspect-ratio: 1;
+    object-fit: cover;
+
+    border-radius: 5px;
+}
+
+.teamHero .teamName {
+    height: auto;
+    width: auto;
+
+    margin-left: 32px;
+    margin-top: 8px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: flex-start;
+}
+
+.teamHero .teamName h2 {
+    font-size: 2em;
+}
+
+.teamInformation {
+    height: auto;
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    padding: 64px;
+}
+
+.teamInformation .grid {
+    height: auto;
+    width: 100%;
+
+    display: grid; 
+    grid-template-areas: 
+    "a a b b b c c c"
+    "a a d d e e f f" 
+    "a a d d e e f f";
+    grid-template-rows: 1fr 1fr 1fr; /* equal rows */ 
+    grid-template-columns: repeat(8, 1fr); /* equal columns */ 
+    gap: 32px;
+}
+
+.a { grid-area: a; }
+.b { grid-area: b; }
+.c { grid-area: c; }
+.d { grid-area: d; }
+.e { grid-area: e; }
+.f { grid-area: f; }
+
+.teamInformation .grid .grid-item {
+    background-color: var(--background);
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.3);
+
+    border-radius: 5px;
+
+    overflow: hidden;
+}
+
+
+
+
+
+.sideBar {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    max-height: 882px;
+
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.sideBar .sidebarHeader {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    padding: 32px;
+}
+
+.sideBar .sidebarHeader h1 {
+    font-size: 2em;
+}
+
+.sideBar .sidebarHeader h2 {
+    width: 100%;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--text);
+}
+
+.sideBar .websiteLink {
+    height: auto;
+    width: 100%;
+    padding: 32px;
+
+    background-color: var(--red);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    text-wrap: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sideBar .websiteLink h3 {
+    margin-bottom: 8px;
+    text-wrap: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sideBar .websiteLink a {
+    text-decoration: underline;
+    text-wrap: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sideBar .randomInfo {
+    height: auto;
+    width: 100%;
+    padding: 32px;
+
+    background-color: var(--background);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.sideBar .randomInfo h3 {
+    margin-bottom: 24px;
+}
+
+.sideBar .randomInfo a {
+    text-decoration: underline;
+}
+
+
+.teamPicture {
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 300px;
+
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.teamPicture img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+
+.locationBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    max-height: 300px;
+
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.locationBox .leftSection {
+    height: 100%;
+    width: 50%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    padding: 32px;
+}
+
+.locationBox .leftSection h2 {
+    padding-bottom: 16px;
+}
+
+.locationBox .leftSection h3 {
+    padding-bottom: 16px;
+}
+
+.locationBox .rightSection {
+    width: 50%;
+    height: 100%;
+}
+
+
+
+
+.statsBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    max-height: 550px;
+
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.randomBox {
+    height: auto;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.statsBox .statsHeader {
+    height: 64px;
+    width: 100%;
+
+    background-color: var(--red);
+
+    padding: 8px 16px;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.statsBox .statsSection {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    border-bottom: 3px solid var(--lightGray);
+}
+
+.statsBox .statsSection .statistic {
+    height: 40px;
+    width: 100%;
+    background-color: var(--background);
+
+    padding: 8px 16px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.statsBox .statsSection .statistic h3 {
+    background: none;
+}
+
+.statsBox .statsSection .statistic:nth-child(even) {
+    background-color: var(--lightGray);
+}
+
+.statsBox .statsSection .statistic h3 {
+    background: none;
+}
+
+.statsBox .chartBox {
+    height: 10px;
+    flex-grow: 1;
+
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 32px;
+    padding-top: 16px;
+
+    justify-self: flex-end;
+}
+
+.statsBox .chartBox2 {
+    height: 10px;
+    flex-grow: 1;
+
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+
+    padding: 32px;
+
+    padding-bottom: 16px;
+    padding-left: 16px;
+
+    justify-self: flex-end;
+}
+
+@media (max-width: 1300px) {
+    .teamInformation .grid {
+        height: auto;
+        width: 100%;
+    
+        display: grid; 
+        grid-template-areas:
+        "a a b b"
+        "a a b b"
+        "a a c c"
+        "a a c c"
+        "d d e e"
+        "d d e e"
+        "d d e e"
+        "f f g g"
+        "f f g g"
+        "f f g g"
+        ;
+        grid-template-rows: repeat(10, 1fr); /* equal rows */ 
+        grid-template-columns: repeat(4, 1fr); /* equal columns */ 
+        gap: 32px;
+
+        margin-bottom: 32px;
+    }
+
+    .locationBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    
+        max-height: 450px;
+    
+        flex-grow: 1;
+        width: 100%;
+        height: 100%;
+    }
+
+    .teamPicture {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    
+        max-height: 450px;
+    
+        flex-grow: 1;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media (max-width: 750px) {
+    .teamInformation .grid {
+        height: auto;
+        width: 100%;
+    
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: 180px;
+    }
+
+    .teamInformation {
+        padding: 32px;
+    }
+
+    .statsBox {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    
+        height: 600px;
+        max-height: 600px;
+    }
+
+    .teamHero {
+        position: relative;
+        height: auto;
+        width: 100%;
+        
+        background-color: var(--red);
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        
+        padding: 32px;
+        padding-left: 40px;
+    }
+    
+    .teamHero .teamLogo {
+        position: relative;
+        height: 80px;
+        aspect-ratio: 1;
+        object-fit: cover;
+    
+        border-radius: 5px;
+    }
+    
+    .teamHero .teamName {
+        margin-top: 8px;
+        margin-left: 0px;
+    }
+    
+    .teamHero .teamName h1 {
+        font-size: 2.75em;
+    }
+
+    .teamHero .teamName h2 {
+        font-size: 1.5em;
+    }
+}
+
+
+
+
+
+
+/*
+Parallax image background option?
+Dark triange for text readability?
+
+.a { grid-area: a; background-color: #f8b400; }
+.b { grid-area: b; background-color: #34ace0; }
+.c { grid-area: c; background-color: #33d9b2; }
+.d { grid-area: d; background-color: #ff4d4d; }
+.e { grid-area: e; background-color: #a6e22e; }
+.f { grid-area: f; background-color: #ffcc00; }
+
+*/

@@ -9,6 +9,9 @@ We hope you find it helpful! :D
 ## Acknowledgements
 
 - [React Confetti](https://www.npmjs.com/package/react-confetti)
+- [Ionicons](https://ionic.io/ionicons)
+- [Chart.js](https://www.chartjs.org/)
+- [React Chart.js](https://github.com/reactchartjs/react-chartjs-2)
 
 ## Authors
 

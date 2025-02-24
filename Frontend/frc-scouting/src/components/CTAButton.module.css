@@ -3,7 +3,10 @@
     display: inline-block;
     position: relative;
 
-    height: auto;
+    height: 48px;
+    margin: none;
+    padding: none;
+    background-color: aqua;
     width: auto;
 
     min-width: fit-content;

@@ -5,6 +5,8 @@ import arrow from '../assets/arrow.png';
 
 import MobileNavSection from './MobileNavSection';
 
+import { Link } from 'react-router-dom';
+
 
 interface Props {
   children?: React.ReactNode;
@@ -41,7 +43,7 @@ function MobileNavigation(props: Props) {
   ]);
 
   linksMap.set('Tools', [
-      { title: "Team Search", link: "/CSSO/curriculums" },
+      { title: "Team Search", link: "/search-teams" },
       { title: "Team Statistics", link: "/CSSO/curriculums/getting-started" },
       { title: "Find Your Team", link: "/CSSO/curriculums/how-to" },
       { title: "Auton Path Checking", link: "/CSSO/curriculums/courses" },
@@ -92,6 +94,11 @@ function MobileNavigation(props: Props) {
 
       return (
         <>
+          <Link to={"/"} className={styles.link}>
+            <div className={`${styles.navigationHeader}`}>
+                <h2 className={`${styles.navigationHeaderText} titleDarkText`}>Home</h2>
+            </div>
+          </Link>
           {Array.from(linksMap.entries()).map(([headerString, sectionData]: [string, ItemType[]], index) => (
             <div className={`${styles.navigationSection} noSelect`} key={index}>
               <div className={`${styles.navigationHeader} ${getDisplayClass(index)}`} onClick={() => handleClick(index)}>

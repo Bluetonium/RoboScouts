@@ -1,5 +1,7 @@
 import styles from './NavBlock.module.css';
 
+import { Link } from 'react-router-dom';
+
 interface Props {
     children?: React.ReactNode;
     isVisible?: boolean;
@@ -16,11 +18,11 @@ function NavBlock(props: Props) {
             return (
                 <>
                     {data.map((item, index) => (
-                        <a href={item.link} className={styles.navLink} target='_blank'>
+                        <Link to={item.link} className={styles.navLink}>
                             <div key={index} className={styles.linkBlock}>
                                 <h2>{item.title}</h2>
                             </div>
-                        </a>
+                        </Link>
                     ))}
                 </>
             );

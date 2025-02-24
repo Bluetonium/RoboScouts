@@ -1,0 +1,534 @@
+:root {
+
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+  
+    line-height: 1.5;
+    font-weight: 400;
+  
+    /*color-scheme: light dark;*/
+  
+    --background: #F7EBEC;
+    --text: #151515;
+    --lightText: #444444;
+    --red: #FF6961;
+    --blue: #4F738E;
+  
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+* {
+padding: 0;
+margin: 0;
+box-sizing: border-box;
+
+font-family: inherit;
+font-size: inherit;
+color: inherit;
+}
+
+
+.bodyDarkText {
+font-family: "M PLUS Code Latin", monospace;
+font-optical-sizing: auto;
+font-style: normal;
+
+line-height: 1.40;
+letter-spacing: 0.04em;
+font-size: 1.2em;
+font-weight: 400;
+
+vertical-align: middle;
+
+color: var(--text);
+
+font-synthesis: none;
+text-rendering: optimizeLegibility;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+
+.titleDarkText {
+font-family: "M PLUS Code Latin", monospace;
+font-optical-sizing: auto;
+font-style: normal;
+
+line-height: 1.60;
+letter-spacing: 0.04em;
+font-size: 1.5em;
+font-weight: 400;
+
+vertical-align: middle;
+
+color: var(--text);
+
+font-synthesis: none;
+text-rendering: optimizeLegibility;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+
+.headerDarkText {
+font-family: "M PLUS Code Latin", monospace;
+font-optical-sizing: auto;
+font-style: normal;
+
+line-height: 1.5;
+letter-spacing: 0.04em;
+font-size: 3em;
+font-weight: 400;
+
+vertical-align: middle;
+
+color: var(--text);
+
+font-synthesis: none;
+text-rendering: optimizeLegibility;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+
+
+.noSelect 
+{
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+}
+
+.buttonBox {
+  height: 100%;
+  aspect-ratio: 1;
+  overflow: visible;
+  position: relative;
+}
+
+
+html {
+background-color: var(--background);
+}
+
+main {
+margin-top: 64px;
+}
+
+.search {
+  height: calc(100vh - 64px);
+  width: 100%;
+
+  overflow: hidden;
+
+  padding: 80px 64px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+}
+
+.searchHeader {
+  height: 100px;
+  width: 100%;
+
+  background-color: var(--background);
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.3);
+
+  border-radius: 5px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 24px;
+
+}
+
+.searchResultsSection {
+  margin-top: 32px;
+  height: calc(100% - 164px);
+  flex-grow: 1;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchResultsSection .verticalBox {
+  height: 100%;
+  width: auto;
+  flex-grow: 1;
+  margin-right: 32px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchResultsSection .verticalBox .searchResults {
+  height: auto;
+  max-height: 100%;
+  width: 100%;
+  flex-grow: 1;
+
+  background-color: var(--background);
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.3);
+
+  border-radius: 5px;
+
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.searchResultsSection .verticalBox .searchFooter {
+  height: 64px;
+  width: 100%;
+  
+  margin-top: 32px;
+
+  background-color: var(--background);
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.3);
+
+  border-radius: 5px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 16px 24px;
+}
+
+.searchResultsSection .verticalBox .searchFooter .footerButton {
+  height: 100%;
+  aspect-ratio: 1;
+  padding: 2px;
+  border: 3px solid var(--text);
+  border-radius: 5px;
+
+  cursor: pointer;
+
+  margin-right: 12px;
+
+  object-fit: cover;
+
+  transition: 0.15s;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchResultsSection .verticalBox .searchFooter .box {
+  position: relative;
+  height: 100%;
+  width: auto;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.searchResultsSection .verticalBox .searchFooter .footerButton:hover {
+  filter: invert(100%);
+  background-color: var(--background);
+  border: 3px solid #00000000;
+}
+
+.searchResultsSection .verticalBox .searchFooter input {
+  height: 100%;
+  width: 64px;
+  outline: none;
+  border: 3px solid var(--text);
+  padding: 2px 4px;
+  padding-right: 0px;
+  overflow: hidden;
+
+  border-radius: 5px;
+  background: none;
+}
+
+.teamInfo {
+  height: 100%;
+  width: 300px;
+
+  background-color: var(--background);
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.3);
+
+  border-radius: 5px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  overflow: hidden;
+}
+
+.searchHeader .searchBar {
+height: 100%;
+width: 50%;
+
+background-color: var(--background);
+border-radius: 5px;
+
+display: flex;
+justify-content: flex-start;
+align-items: center;
+
+border: 3px solid var(--red);
+}
+
+.searchHeader .searchBar .imgBackground {
+height: 100%;
+position: relative;
+width: auto;
+
+padding: 6px;
+padding-right: 10px;
+
+background-color: var(--red);
+cursor: pointer;
+
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.searchHeader .searchBar .imgBackground img {
+height: 100%;
+aspect-ratio: 1;
+
+object-fit: cover;
+
+background: none;
+
+transition: 0.1s ease-in;
+}
+
+.searchHeader .searchBar .imgBackground:hover img {
+transform: rotate(90deg);
+}
+
+.searchHeader .searchBar input {
+width: 100%;
+
+background: none;
+border: none;
+outline: none;
+
+padding-left: 16px;
+padding-right: 16px;
+padding-bottom: 0px;
+margin-bottom: 0px;
+}
+
+.searchHeader .headerButton {
+  height: 100%;
+  aspect-ratio: 1;
+
+  padding: 8px;
+  border: 3px solid var(--text);
+  border-radius: 5px;
+
+  cursor: pointer;
+
+  object-fit: cover;
+
+  transition: 0.15s;
+}
+
+.searchHeader .headerButton:hover {
+  filter: invert(100%);
+  background-color: var(--background);
+  border: 3px solid #00000000;
+  padding: 5px;
+}
+
+.verticalBox .searchResults .searchResult {
+  height: 48px;
+  width: 100%;
+
+  cursor: pointer;
+
+  padding: 8px 24px;
+
+  border-bottom: 2px solid #15151561;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.verticalBox .searchResults .searchResult:hover {
+  background-color: #dfd6d7;
+  
+}
+
+.teamInfo .teamHeader {
+  height: 200px;
+  background-color: var(--red);
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding: 32px;
+
+}
+
+.teamInfo .teamHeader h2 {
+  font-size: 2em;
+  color: var(--background);
+
+  line-height: 1.35;
+}
+
+.teamInfo .teamHeader h3 {
+  margin-top: 8px;
+  color: var(--background);
+}
+
+.teamResults {
+  height: auto;
+  width: 100%;
+  flex-grow: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 16px;
+}
+
+.instructionsHeader {
+  width: 100%;
+  height: auto;
+  background-color: var(--red);
+  padding: 16px 24px;
+}
+
+.instructionsHeader h2 {
+  font-size: 2em;
+  color: var(--background);
+
+  line-height: 1.35;
+}
+
+.instructionsText {
+  padding: 16px 24px;
+  width: 100%;
+  height: auto;
+}
+
+.instructionsText h3 {
+  font-size: 1.1em;
+}
+
+@media (max-width: 900px) {
+  .search {
+    padding: 32px 32px;
+    height: calc(150vh - 72px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .searchResultsSection {
+    margin-top: 32px;
+    height: auto;
+    width: 100%;
+
+    flex-grow: 0;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .searchResultsSection .verticalBox {
+    height: auto;
+    flex-grow: 0;
+    width: 100%;
+    margin-right: 0px;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .searchResultsSection .verticalBox .searchResults {
+    height: 200px;
+    width: 100%;
+    flex-grow: 0;
+  }
+
+  .searchResultsSection .verticalBox .searchFooter {
+    margin-bottom: 32px;
+  }
+  
+  .teamInfo {
+    height: auto;
+    width: 100%;
+  }
+
+  .searchHeader .searchBar {
+    width: 80%;
+  }
+
+  .searchResultsSection .verticalBox .searchFooter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding-top: 16px;
+    padding-bottom: 16px;
+
+    height: 128px;
+  }
+
+  .searchResultsSection .verticalBox .searchFooter .box {
+    height: 50%;
+    padding-bottom: 16px;
+  }
+}
+
+@media (max-height: 650px) {
+  .search {
+    height: calc(120vh - 72px);
+  }
+}
+
+@media (max-height: 550px) {
+  .search {
+    height: calc(150vh - 72px);
+  }
+}
+
+@media (max-height: 450px) {
+  .search {
+    height: calc(175vh - 72px);
+  }
+}
+
+/*
+Make sure lilliana adds a team search number limit on the search function - We cant be sending more than 100 teams at a time
+*/
+
+

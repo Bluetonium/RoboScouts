@@ -4,6 +4,8 @@ import { useState  } from 'react';
 import Confetti from 'react-confetti';
 import ColorButton from './ColorButton';
 
+import { Link } from 'react-router-dom';
+
 function Footer() {
     const [count, setCount] = useState(0);
     const [showConfetti, setShowConfetti] = useState(false);
@@ -65,9 +67,9 @@ function Footer() {
                         <h2 className="titleDarkText" key={index}>{sectionName}</h2>
                         {
                             sectionData.map((item: { title: string, link: string }, index1: number) => (
-                                <a href={item.link} className={styles.navLink} target='_blank'>
+                                <Link to={item.link} className={styles.navLink}>
                                     <h3 className="bodyDarkText" key={index1}>{item.title}</h3>
-                                </a>
+                                </Link>
                             ))
                         }
                     </div>

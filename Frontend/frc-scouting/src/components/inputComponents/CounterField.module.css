@@ -1,0 +1,52 @@
+.box {
+    width: 100%;
+    height: auto;
+
+    margin-top: 16px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    width: 50%;
+
+    flex-shrink: 0;
+}
+
+.counterField {
+    height: 48px;
+    width: 50%;
+
+    flex-grow: 1;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    border: 2px solid var(--text);
+    border-radius: 10px;
+}
+
+.buttonLeft {
+    height: 100%;
+    aspect-ratio: 1;
+
+    object-fit: contain;
+
+    border-right: 2px solid var(--text);
+
+    cursor: pointer;
+}
+
+.buttonRight {
+    height: 100%;
+    aspect-ratio: 1;
+
+    border-left: 2px solid var(--text);
+
+    cursor: pointer;
+}

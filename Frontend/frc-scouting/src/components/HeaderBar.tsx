@@ -10,6 +10,7 @@ import menu from '../assets/menu.png';
 import MobileNavigation from './MobileNavigation';
 
 import { useToast } from './ToastContext';
+import { Link } from 'react-router-dom';
 
 function HeaderBar() {
     let linksMap = new Map();
@@ -23,7 +24,7 @@ function HeaderBar() {
     ]);
 
     linksMap.set('Tools', [
-        { title: "Team Search", link: "/CSSO/curriculums" },
+        { title: "Team Search", link: "/search-teams" },
         { title: "Team Statistics", link: "/CSSO/curriculums/getting-started" },
         { title: "Find Your Team", link: "/CSSO/curriculums/how-to" },
         { title: "Auton Path Checking", link: "/CSSO/curriculums/courses" },
@@ -88,9 +89,9 @@ function HeaderBar() {
             <div className={styles.header}>
                 <div className={styles.headerLeftSection}>
                     <img src={menu} className={styles.menuImage} onClick={toggleMobileNav}></img>
-                    <a href='/' target='_blank'>
+                    <Link to={"/"}>
                         <h2 className="titleDarkText">RoboScouts</h2>
-                    </a>
+                    </Link>
                     {generateHeaderLinks()}
                 </div>
                 <div className={styles.headerRightSection}>

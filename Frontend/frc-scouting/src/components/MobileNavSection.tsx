@@ -1,5 +1,7 @@
 import styles from './MobileNavSection.module.css';
 
+import { Link } from 'react-router-dom';
+
 interface Props {
     data: any[];
     active: boolean;
@@ -12,9 +14,9 @@ function MobileNavSection(props: Props) {
              return (
                 <div className={styles.navigationBody}>
                     {props.data.map((item, idx) => (
-                        <a href={item.link} target='_blank' className={styles.link}>
+                        <Link to={item.link} className={styles.link}>
                             <h2 className={`${styles.navigationLink} bodyDarkText`} key={idx}>{item.title}</h2>
-                        </a>
+                        </Link>
                     ))}
                 </div>
             );

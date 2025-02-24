@@ -48,7 +48,7 @@ function AccountMenu(props: Props) {
         <img className={styles.accountImg} src={defaultPFP} />
         <div className={styles.rightSection}>
             <div className={styles.topSection}>
-                <h2 className="titleDarkText">Maverick Dick</h2>
+                <h2 className="titleDarkText">Username</h2>
             </div>
             <div className={styles.bottomSection}>
                 <div className={styles.auto} onMouseEnter={() => handleMouseEnter(1)} onMouseLeave={handleMouseLeave}>
