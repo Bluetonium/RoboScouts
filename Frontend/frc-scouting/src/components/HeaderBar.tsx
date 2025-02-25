@@ -18,28 +18,25 @@ function HeaderBar() {
     const toast = useToast();
 
     linksMap.set('Scouting', [
-        { title: "Information", link: "/CSSO/learn-more" },
-        { title: "Get Started", link: "/CSSO/login" },
-        { title: "Register Your Team", link: "/CSSO/login" },
+        {title: "Data Collection", link:"/scouting/data-collection"},
+    ]);
+
+    linksMap.set('Analysis', [
+        {title: "Data Analysis", link:"/analysis/data-analysis"},
     ]);
 
     linksMap.set('Tools', [
-        { title: "Team Search", link: "/search-teams" },
-        { title: "Team Statistics", link: "/CSSO/curriculums/getting-started" },
-        { title: "Find Your Team", link: "/CSSO/curriculums/how-to" },
-        { title: "Auton Path Checking", link: "/CSSO/curriculums/courses" },
-        { title: "Manual Scouting", link: "/CSSO/curriculums/learning-paths" },
+        {title: "Team Search", link:"/tools/team-search"},
     ]);
 
     linksMap.set('About Us', [
-        { title: "Bluetonium 127", link: "/CSSO/clubs" },
-        { title: "About Us", link: "/CSSO/clubs/benefits" },
+        {title: "About Us", link:"/about-us/"},
     ]);
 
     linksMap.set('Legal', [
-        { title: "Terms and Conditions", link: "/CSSO/projects" },
-        { title: "Privacy Policy", link: "/CSSO/projects" },
-        { title: "Contact Us", link: "/CSSO/projects/suggestions" },
+        {title: "Terms and Conditions", link:"/legal/terms-and-conditions"},
+        {title: "Privacy Policy", link:"/legal/privacy-policy"},
+        {title: "Contact Us", link:"/legal/contact-us"},
     ]);
 
     const [showAccountMenu, setShowAccountMenu] = useState(false);
@@ -97,7 +94,7 @@ function HeaderBar() {
                 <div className={styles.headerRightSection}>
                     <CTAButton color='var(--red)' textColor="var(--text)" hoverMode="hoverMode1">Get Started</CTAButton>
 
-                    <div className={styles.accountSquare} onClick={handleClick}>
+                    <div className={styles.accountSquare} onClick={handleClick} style={{ display: "none" }}>
                         <img className={styles.accountSquareImg} src={defaultPFP} alt="User  Profile"/>
                     </div>
                 </div>

@@ -12,7 +12,8 @@ import CTAButton from '../components/CTAButton';
 
 import { Link } from 'react-router-dom';
 
-import './team-search.css';
+import '../constants.css';
+import style from './team-search.module.css';
 
 const TeamSearch = () => {
   const [showLoadingScreen, setShowLoadingScreen] = useState(true);
@@ -54,96 +55,96 @@ const TeamSearch = () => {
       </header>
       <LoadingScreen isVisible={showLoadingScreen}></LoadingScreen>
       <main>
-        <div className='search'>
+        <div className={style.search}>
 
-          <div className='searchHeader'>
-            <div className='searchBar'>
-              <div className='imgBackground' onMouseEnter={() => handleMouseEnter(1)} onMouseLeave={handleMouseLeave}>
-                <img src={search} className='noSelect'/>
+          <div className={style.searchHeader}>
+            <div className={style.searchBar}>
+              <div className={style.imgBackground} onMouseEnter={() => handleMouseEnter(1)} onMouseLeave={handleMouseLeave}>
+                <img src={search} className={`noSelect`}/>
                 {activeTooltip === 1 && <Tooltip message={"Search"} />}
               </div>
-              <input className='titleDarkText' placeholder='Name or #!' type='text'></input>
+              <input className={`titleDarkText`} placeholder='Name or #!' type='text'></input>
             </div>
-            <div className='buttonBox' onMouseEnter={() => handleMouseEnter(2)} onMouseLeave={handleMouseLeave}>
-              <img className='headerButton' src={newspaper} onClick={() => toggleInstructions()}></img>
+            <div className={style.buttonBox} onMouseEnter={() => handleMouseEnter(2)} onMouseLeave={handleMouseLeave}>
+              <img className={style.headerButton} src={newspaper} onClick={() => toggleInstructions()}></img>
               {activeTooltip === 2 && <Tooltip message={"Toggle Instructions"} />}
             </div>
           </div>
 
-          <div className='searchResultsSection'>
-            <div className='verticalBox'>
-              <div className='searchResults'>
-                <div className='searchResult'>
-                  <h3 className='bodyDarkText'>#127 - Bluetonium</h3>
+          <div className={style.searchResultsSection}>
+            <div className={style.verticalBox}>
+              <div className={style.searchResults}>
+                <div className={style.searchResult}>
+                  <h3 className={`bodyDarkText`}>#127 - Bluetonium</h3>
                 </div>
-                <div className='searchResult'>
-                  <h3 className='bodyDarkText'>#127 - Bluetonium</h3>
+                <div className={style.searchResult}>
+                  <h3 className={`bodyDarkText`}>#127 - Bluetonium</h3>
                 </div>
-                <div className='searchResult'>
-                  <h3 className='bodyDarkText'>#127 - Bluetonium</h3>
+                <div className={style.searchResult}>
+                  <h3 className={`bodyDarkText`}>#127 - Bluetonium</h3>
                 </div>
-                <div className='searchResult'>
-                  <h3 className='bodyDarkText'>#127 - Bluetonium</h3>
+                <div className={style.searchResult}>
+                  <h3 className={`bodyDarkText`}>#127 - Bluetonium</h3>
                 </div>
-                <div className='searchResult'>
-                  <h3 className='bodyDarkText'>#127 - Bluetonium</h3>
+                <div className={style.searchResult}>
+                  <h3 className={`bodyDarkText`}>#127 - Bluetonium</h3>
                 </div>
-                <div className='searchResult'>
-                  <h3 className='bodyDarkText'>#127 - Bluetonium</h3>
+                <div className={style.searchResult}>
+                  <h3 className={`bodyDarkText`}>#127 - Bluetonium</h3>
                 </div>
-                <div className='searchResult'>
-                  <h3 className='bodyDarkText'>#127 - Bluetonium</h3>
+                <div className={style.searchResult}>
+                  <h3 className={`bodyDarkText`}>#127 - Bluetonium</h3>
                 </div>
-                <div className='searchResult'>
-                  <h3 className='bodyDarkText'>#127 - Bluetonium</h3>
+                <div className={style.searchResult}>
+                  <h3 className={`bodyDarkText`}>#127 - Bluetonium</h3>
                 </div>
-                <div className='searchResult'>
-                  <h3 className='bodyDarkText'>#127 - Bluetonium</h3>
+                <div className={style.searchResult}>
+                  <h3 className={`bodyDarkText`}>#127 - Bluetonium</h3>
                 </div>
-                <div className='searchResult'>
-                  <h3 className='bodyDarkText'>#127 - Bluetonium</h3>
+                <div className={style.searchResult}>
+                  <h3 className={`bodyDarkText`}>#127 - Bluetonium</h3>
                 </div>
-                <div className='searchResult'>
-                  <h3 className='bodyDarkText'>#127 - Bluetonium</h3>
+                <div className={style.searchResult}>
+                  <h3 className={`bodyDarkText`}>#127 - Bluetonium</h3>
                 </div>
-                <div className='searchResult'>
-                  <h3 className='bodyDarkText'>#127 - Bluetonium</h3>
+                <div className={style.searchResult}>
+                  <h3 className={`bodyDarkText`}>#127 - Bluetonium</h3>
                 </div>
               </div>
 
-              <div className='searchFooter'>
-                <div className='box'>
-                  <img src={arrow} className='footerButton'></img>
-                  <img src={arrow} className='footerButton' style={{rotate: "180deg", marginRight: "24px"}}></img>
-                  <h3 className='bodyDarkText'>1-50 of 227</h3>
+              <div className={style.searchFooter}>
+                <div className={style.box}>
+                  <img src={arrow} className={style.footerButton}></img>
+                  <img src={arrow} className={style.footerButton} style={{rotate: "180deg", marginRight: "24px"}}></img>
+                  <h3 className={`bodyDarkText`}>1-50 of 227</h3>
                 </div>
-                <h3 className='bodyDarkText'><input type='number' min={5} max={50} step={5} value={resultsPerPage} onChange={handleChange}></input> Per page</h3>
+                <h3 className={`bodyDarkText`}><input type='number' min={5} max={50} step={5} value={resultsPerPage} onChange={handleChange}></input> Per page</h3>
               </div>
             </div>
 
-            <div className='teamInfo'>
+            <div className={style.teamInfo}>
               {
                 showInstructions ? (
                   <>
-                    <div className='instructionsHeader'>
-                      <h2 className='titleDarkText'>RoboScouts Team Search!</h2>
+                    <div className={style.instructionsHeader}>
+                      <h2 className={`titleDarkText`}>RoboScouts Team Search!</h2>
                     </div>
-                    <div className='instructionsText'>
-                      <h3 className='bodyDarkText'>- Try typing in a number like "#127", or a team name like "Bluetonium"!</h3><br></br>
-                      <h3 className='bodyDarkText'>- When searching numbers, remember to use "#".</h3><br></br>
-                      <h3 className='bodyDarkText'>- We hope you find this useful! :D</h3>
+                    <div className={style.instructionsText}>
+                      <h3 className={`bodyDarkText`}>- Try typing in a number like "#127", or a team name like "Bluetonium"!</h3><br></br>
+                      <h3 className={`bodyDarkText`}>- When searching numbers, remember to use "#".</h3><br></br>
+                      <h3 className={`bodyDarkText`}>- We hope you find this useful! :D</h3>
                     </div>
                   </>
                 ) : (
                   <>
-                    <div className='teamHeader'>
-                      <h2 className='titleDarkText'>Bluetonium</h2>
-                      <h3 className='bodyDarkText'>-- #127</h3>
+                    <div className={style.teamHeader}>
+                      <h2 className={`titleDarkText`}>Bluetonium</h2>
+                      <h3 className={`bodyDarkText`}>-- #127</h3>
                     </div>
-                    <div className='teamResults'>
-                      <h3 className='bodyDarkText'>- Friendswood, TX, USA</h3>
-                      <h3 className='bodyDarkText'>- Description</h3>
-                      <Link to={"/team"}>
+                    <div className={style.teamResults}>
+                      <h3 className={`bodyDarkText`}>- Friendswood, TX, USA</h3>
+                      <h3 className={`bodyDarkText`}>- Description</h3>
+                      <Link to={"/tools/team-search/team"}>
                         <CTAButton color='var(--red)' textColor="var(--text)" style={{ marginTop: '16px' }} hoverMode="hoverMode1">View Team</CTAButton>
                       </Link>
                     </div>

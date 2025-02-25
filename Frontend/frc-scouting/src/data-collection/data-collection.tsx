@@ -18,8 +18,9 @@ import close from '../assets/ionicons/close.svg';
 // Ionicons
 // QR code libraries
 
+import '../constants.css';
+import styles from './data-collection.module.css';
 
-import './data-collection.css';
 import NumberField from '../components/inputComponents/NumberField';
 import TextField from '../components/inputComponents/TextField';
 import Dropdown from '../components/inputComponents/Dropdown';
@@ -206,7 +207,7 @@ const DataCollection = () => {
       bgColor="#FFFFFF"
       fgColor="#000000"
       level="L"
-      className='QRCode'
+      className={styles.QRCode}
     />);
   }
 
@@ -217,10 +218,10 @@ const DataCollection = () => {
       </header>
       <LoadingScreen isVisible={showLoadingScreen}></LoadingScreen>
       <main>
-        <div className='sectionBox'>
-            <div className='section' style={{ left: ((0 + (currentSlide * -100)).toString() + "%") }}>
-                <div className='centerColumn'>
-                    <h2 className='bodyDarkText centerColumnTitleBlock'>Team Selection</h2>
+        <div className={styles.sectionBox}>
+            <div className={styles.section} style={{ left: ((0 + (currentSlide * -100)).toString() + "%") }}>
+                <div className={styles.centerColumn}>
+                    <h2 className={`bodyDarkText ${styles.centerColumnTitleBlock}`}>Team Selection</h2>
                     <TextField text='Team Name: ' value={teamName} onChange={setTeamName} placeholder='Bluetonium' ></TextField>
                     <NumberField text='Team Number: ' value={teamNumber} onChange={setTeamNumber} />
                     <Dropdown text='Team Position: ' value={teamPosition} onChange={setTeamPosition} options={[
@@ -234,24 +235,24 @@ const DataCollection = () => {
                     <NumberField text='Match Number: ' value={matchNumber} onChange={setMatchNumber} />
                 </div>
             </div>
-            <div className='section1' style={{ left: ((100 + (currentSlide * -100)).toString() + "%") }}>
-                <div className='headerSection'>
-                    <h2 className='bodyDarkText subtitleBlock'>Auto</h2>
-                    <h2 className='bodyDarkText titleBlock'>#128: #24950</h2>
-                    <h2 className='bodyDarkText subtitleBlock'>Tele-Op</h2>
+            <div className={styles.section1} style={{ left: ((100 + (currentSlide * -100)).toString() + "%") }}>
+                <div className={styles.headerSection}>
+                    <h2 className={`bodyDarkText ${styles.subtitleBlock}`}>Auto</h2>
+                    <h2 className={`bodyDarkText ${styles.titleBlock}`}>#128: #24950</h2>
+                    <h2 className={`bodyDarkText ${styles.subtitleBlock}`}>Tele-Op</h2>
                 </div>
-                <div className='bodyBlock'>
-                    <div className='leftBlock'>
-                      <div className='leftSide'>
-                        <h3 className='headerBlock bodyDarkText'>Algae</h3>
+                <div className={styles.bodyBlock}>
+                    <div className={styles.leftBlock}>
+                      <div className={styles.leftSide}>
+                        <h3 className={`bodyDarkText ${styles.headerBlock}`}>Algae</h3>
                         <CounterField value={autoNet} onChange={setAutoNet} text='Net:'></CounterField>
                         <CounterField value={autoProcessor} onChange={setAutoProcessor} text='Processor:'></CounterField>
-                        <h3 className='headerBlock bodyDarkText'>Exit</h3>
+                        <h3 className={`bodyDarkText ${styles.headerBlock}`}>Exit</h3>
                         <Checkbox text='Ground: ' checked={autoGround} onChange={setAutoGround} />
                         <Checkbox text='Leave: ' checked={autoLeave} onChange={setAutoLeave} />
                       </div>
-                      <div className='rightSide'>
-                        <h3 className='headerBlock bodyDarkText'>Coral</h3>
+                      <div className={styles.rightSide}>
+                        <h3 className={`bodyDarkText ${styles.headerBlock}`}>Coral</h3>
                         <CounterField value={autoL4} onChange={setAutoL4} text='L4:'></CounterField>
                         <CounterField value={autoL3} onChange={setAutoL3} text='L3:'></CounterField>
                         <CounterField value={autoL2} onChange={setAutoL2} text='L2:'></CounterField>
@@ -259,52 +260,53 @@ const DataCollection = () => {
                         <CounterField value={autoMiss} onChange={setAutoMiss} text='Miss:'></CounterField>
                       </div>
                     </div>
-                    <div className='rightBlock'>
-                      <div className='leftSide'>
-                        <h3 className='headerBlock bodyDarkText'>Coral</h3>
+                    <div className={styles.rightBlock}>
+                      <div className={styles.leftSide}>
+                        <h3 className={`bodyDarkText ${styles.headerBlock}`}>Coral</h3>
                         <CounterField value={teleL4} onChange={setTeleL4} text='L4:'></CounterField>
                         <CounterField value={teleL3} onChange={setTeleL3} text='L3:'></CounterField>
                         <CounterField value={teleL2} onChange={setTeleL2} text='L2:'></CounterField>
                         <CounterField value={teleL1} onChange={setTeleL1} text='L1:'></CounterField>
                         <CounterField value={teleMiss} onChange={setTeleMiss} text='Miss:'></CounterField>
                       </div>
-                      <div className='rightSide'>
-                        <h3 className='headerBlock bodyDarkText'>Algae</h3>
+                      <div className={styles.rightSide}>
+                        <h3 className={`bodyDarkText ${styles.headerBlock}`}>Algae</h3>
                         <CounterField value={teleNet} onChange={setTeleNet} text='Net:'></CounterField>
                         <CounterField value={teleProcessor} onChange={setTeleProcessor} text='Processor:'></CounterField>
-                        <h3 className='headerBlock bodyDarkText'>Exit</h3>
+                        <h3 className={`bodyDarkText ${styles.headerBlock}`}>Exit</h3>
                         <Checkbox text='Ground: ' checked={teleGround} onChange={setTeleGround} />
                       </div>
                     </div>
                 </div>
             </div>
-            <div className='section2' style={{ left: ((200 + (currentSlide * -100)).toString() + "%") }}>
-              <div className='centerColumn'>
-                    <h2 className='bodyDarkText centerColumnTitleBlock'>Post Match</h2>
+            <div className={styles.section2} style={{ left: ((200 + (currentSlide * -100)).toString() + "%") }}>
+              <div className={styles.centerColumn}>
+                    <h2 className={`bodyDarkText ${styles.centerColumnTitleBlock}`}>Post Match</h2>
                     <Dropdown text='Hang: ' value={teamHang} onChange={setTeamHang} options={[
                         { value: 'deep', label: 'Deep' },
                         { value: 'shallow', label: 'Shallow' },
+                        { value: 'none', label: 'None' },
                     ]}/>
                     <Paragraph text='Notes: ' placeholder='Notes notes notes...' value={notes} maxLength={570} onChange={setNotes}></Paragraph>
                 </div>
             </div>
-            <div className='section3' style={{ left: ((300 + (currentSlide * -100)).toString() + "%") }}>
-                <div className='centerColumn'>
-                    <h2 className='bodyDarkText centerColumnTitleBlock'>Send Data</h2>
-                    <div className='horizontalBox'>
-                      <button className='bodyDarkText dataButton' onClick={() => {
+            <div className={styles.section3} style={{ left: ((300 + (currentSlide * -100)).toString() + "%") }}>
+                <div className={styles.centerColumn}>
+                    <h2 className={`bodyDarkText ${styles.centerColumnTitleBlock}`}>Send Data</h2>
+                    <div className={styles.horizontalBox}>
+                      <button className={`bodyDarkText ${styles.dataButton}`} onClick={() => {
                         setShowQRCode(true);
                         updateQRCode();
                       }}>QR Codes</button>
-                      <button className='bodyDarkText dataButton' onClick={() => {downloadJSON()}}>Download JSON</button>
+                      <button className={`bodyDarkText ${styles.dataButton}`} onClick={() => {downloadJSON()}}>Download JSON</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div className='mobileSectionBox'>
-          <div className='mobileSection' style={{ left: ((0 + (currentSlide * -100)).toString() + "%") }}>
-            <div className='mobileCenterColumn'>
-                <h2 className='bodyDarkText centerColumnTitleBlock'>Team Selection</h2>
+        <div className={styles.mobileSectionBox}>
+          <div className={styles.mobileSection} style={{ left: ((0 + (currentSlide * -100)).toString() + "%") }}>
+            <div className={styles.mobileCenterColumn}>
+                <h2 className={`bodyDarkText ${styles.centerColumnTitleBlock}`}>Team Selection</h2>
                 <TextField text='Team Name: ' value={teamName} onChange={setTeamName} placeholder='Bluetonium' ></TextField>
                 <NumberField text='Team Number: ' value={teamNumber} onChange={setTeamNumber} />
                 <Dropdown text='Team Position: ' value={teamPosition} onChange={setTeamPosition} options={[
@@ -318,53 +320,54 @@ const DataCollection = () => {
                 <NumberField text='Match Number: ' value={matchNumber} onChange={setMatchNumber} />
             </div>
           </div>
-          <div className='mobileSection1' style={{ left: ((100 + (currentSlide * -100)).toString() + "%") }}>
-              <h2 className='bodyDarkText centerColumnTitleBlock'>{"Auto: #" + teamNumber}</h2>
-              <h3 className='headerBlock bodyDarkText'>Coral</h3>
+          <div className={styles.mobileSection1} style={{ left: ((100 + (currentSlide * -100)).toString() + "%") }}>
+              <h2 className={`bodyDarkText ${styles.centerColumnTitleBlock}`}>{"Auto: #" + teamNumber}</h2>
+              <h3 className={`bodyDarkText ${styles.headerBlock}`}>Coral</h3>
               <CounterField value={autoL4} onChange={setAutoL4} text='L4:'></CounterField>
               <CounterField value={autoL3} onChange={setAutoL3} text='L3:'></CounterField>
               <CounterField value={autoL2} onChange={setAutoL2} text='L2:'></CounterField>
               <CounterField value={autoL1} onChange={setAutoL1} text='L1:'></CounterField>
               <CounterField value={autoMiss} onChange={setAutoMiss} text='Miss:'></CounterField>
-              <h3 className='headerBlock bodyDarkText'>Algae</h3>
+              <h3 className={`bodyDarkText ${styles.headerBlock}`}>Algae</h3>
               <CounterField value={autoNet} onChange={setAutoNet} text='Net:'></CounterField>
               <CounterField value={autoProcessor} onChange={setAutoProcessor} text='Processor:'></CounterField>
-              <h3 className='headerBlock bodyDarkText'>Exit</h3>
+              <h3 className={`bodyDarkText ${styles.headerBlock}`}>Exit</h3>
               <Checkbox text='Ground: ' checked={autoGround} onChange={setAutoGround} />
               <Checkbox text='Leave: ' checked={autoLeave} onChange={setAutoLeave} />
           </div>
-          <div className='mobileSection2' style={{ left: ((200 + (currentSlide * -100)).toString() + "%") }}>
-          <h2 className='bodyDarkText centerColumnTitleBlock'>{"Tele-Op: #" + teamNumber}</h2>
-            <h3 className='headerBlock bodyDarkText'>Coral</h3>
+          <div className={styles.mobileSection2} style={{ left: ((200 + (currentSlide * -100)).toString() + "%") }}>
+            <h2 className={`bodyDarkText ${styles.centerColumnTitleBlock}`}>{"Tele-Op: #" + teamNumber}</h2>
+            <h3 className={`bodyDarkText ${styles.headerBlock}`}>Coral</h3>
             <CounterField value={teleL4} onChange={setTeleL4} text='L4:'></CounterField>
             <CounterField value={teleL3} onChange={setTeleL3} text='L3:'></CounterField>
             <CounterField value={teleL2} onChange={setTeleL2} text='L2:'></CounterField>
             <CounterField value={teleL1} onChange={setTeleL1} text='L1:'></CounterField>
             <CounterField value={teleMiss} onChange={setTeleMiss} text='Miss:'></CounterField>
-            <h3 className='headerBlock bodyDarkText'>Algae</h3>
+            <h3 className={`bodyDarkText ${styles.headerBlock}`}>Algae</h3>
             <CounterField value={teleNet} onChange={setTeleNet} text='Net:'></CounterField>
             <CounterField value={teleProcessor} onChange={setTeleProcessor} text='Processor:'></CounterField>
-            <h3 className='headerBlock bodyDarkText'>Exit</h3>
+            <h3 className={`bodyDarkText ${styles.headerBlock}`}>Exit</h3>
             <Checkbox text='Ground: ' checked={teleGround} onChange={setTeleGround} />
           </div>
-          <div className='mobileSection3' style={{ left: ((300 + (currentSlide * -100)).toString() + "%") }}>
-            <div className='mobileCenterColumn'>
-                <h2 className='bodyDarkText centerColumnTitleBlock'>{"Post Match: #" + teamNumber}</h2>
+          <div className={styles.mobileSection3} style={{ left: ((300 + (currentSlide * -100)).toString() + "%") }}>
+            <div className={styles.mobileCenterColumn}>
+                <h2 className={`bodyDarkText ${styles.centerColumnTitleBlock}`}>{"Post Match: #" + teamNumber}</h2>
                 <Dropdown text='Hang: ' value={teamHang} onChange={setTeamHang} options={[
                     { value: 'deep', label: 'Deep' },
                     { value: 'shallow', label: 'Shallow' },
+                    { value: 'none', label: 'None' },
                 ]}/>
                 <Paragraph text='Notes: ' placeholder='Notes notes notes...' value={notes} maxLength={570} onChange={setNotes}></Paragraph>
             </div>
           </div>
-          <div className='mobileSection4' style={{ left: ((400 + (currentSlide * -100)).toString() + "%") }}>
-            <div className='mobileCenterColumn'>
-                <h2 className='bodyDarkText centerColumnTitleBlock'>Send Data</h2>
-                <button className='bodyDarkText dataButton' onClick={() => {
+          <div className={styles.mobileSection4} style={{ left: ((400 + (currentSlide * -100)).toString() + "%") }}>
+            <div className={styles.mobileCenterColumn}>
+                <h2 className={`bodyDarkText ${styles.centerColumnTitleBlock}`}>Send Data</h2>
+                <button className={`bodyDarkText ${styles.dataButton}`} onClick={() => {
                   setShowQRCode(true);
                   updateQRCode();
                 }} style={{ width: "100%", marginTop: "16px" }}>QR Codes</button>
-                <button className='bodyDarkText dataButton' onClick={() => {downloadJSON()}} style={{ width: "100%", marginTop: "16px" }}>Download JSON</button>
+                <button className={`bodyDarkText ${styles.dataButton}`} onClick={() => {downloadJSON()}} style={{ width: "100%", marginTop: "16px" }}>Download JSON</button>
             </div>
           </div>
         </div>
@@ -374,7 +377,7 @@ const DataCollection = () => {
         <Footer />
       </footer>
 
-      <h2 className='cornerButton bodyDarkText noSelect' onClick={() => {
+      <h2 className={`bodyDarkText noSelect ${styles.cornerButton}`} onClick={() => {
         if(width < 1100) {
           manageMobileClick(currentSlide);
         } else {
@@ -383,12 +386,12 @@ const DataCollection = () => {
       }}>Next</h2>
 
       {showQRCode && (
-          <div className='QRCodeMenu'>
-              <div className='QRCodeBox'>
+          <div className={styles.QRCodeMenu}>
+              <div className={styles.QRCodeBox}>
                   {QRCodeElement}
                   <img 
                       src={close} 
-                      className='closeButton' 
+                      className={styles.closeButton}
                       onClick={() => setShowQRCode(false)} 
                       alt="Close" 
                   />

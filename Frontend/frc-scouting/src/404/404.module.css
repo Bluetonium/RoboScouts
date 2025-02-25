@@ -1,0 +1,388 @@
+:root {
+
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+  
+    line-height: 1.5;
+    font-weight: 400;
+  
+    /*color-scheme: light dark;*/
+  
+    --background: #F7EBEC;
+    --text: #151515;
+    --lightText: #444444;
+    --red: #FF6961;
+    --blue: #4F738E;
+  
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+* {
+padding: 0;
+margin: 0;
+box-sizing: border-box;
+
+font-family: inherit;
+font-size: inherit;
+color: inherit;
+}
+
+
+.bodyDarkText {
+font-family: "M PLUS Code Latin", monospace;
+font-optical-sizing: auto;
+font-style: normal;
+
+line-height: 1.40;
+letter-spacing: 0.04em;
+font-size: 1.35em;
+font-weight: 400;
+
+vertical-align: middle;
+
+color: var(--text);
+
+font-synthesis: none;
+text-rendering: optimizeLegibility;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+
+.titleDarkText {
+font-family: "M PLUS Code Latin", monospace;
+font-optical-sizing: auto;
+font-style: normal;
+
+line-height: 1.60;
+letter-spacing: 0.04em;
+font-size: 1.5em;
+font-weight: 400;
+
+vertical-align: middle;
+
+color: var(--text);
+
+font-synthesis: none;
+text-rendering: optimizeLegibility;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+
+.headerDarkText {
+font-family: "M PLUS Code Latin", monospace;
+font-optical-sizing: auto;
+font-style: normal;
+
+line-height: 1.5;
+letter-spacing: 0.04em;
+font-size: 3em;
+font-weight: 400;
+
+vertical-align: middle;
+
+color: var(--text);
+
+font-synthesis: none;
+text-rendering: optimizeLegibility;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+
+
+.noSelect 
+{
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+}
+
+html {
+background-color: var(--background);
+}
+
+main {
+margin-top: 64px;
+}
+
+.hero {
+position: relative;
+
+height: 75vh;
+height: 75svh;
+
+width: 100%;
+
+display: flex;
+flex-direction: row;
+}
+
+.leftSection {
+position: relative;
+height: 100%;
+width: 40%;
+
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+.leftSection img {
+height: 100%;
+width: 100%;
+
+object-fit: contain;
+
+opacity: 0.6;
+}
+
+.rightSection {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding: 64px;
+}
+
+.rightSection h1 {
+font-family: "M PLUS Code Latin", monospace;
+font-optical-sizing: auto;
+font-style: normal;
+
+line-height: 1.5;
+letter-spacing: 0.07em;
+font-size: 6em;
+font-weight: 400;
+
+vertical-align: middle;
+
+color: var(--text);
+
+font-synthesis: none;
+text-rendering: optimizeLegibility;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+
+margin-left: -6px;
+}
+
+.rightSection h3 {
+padding-bottom: 16px;
+}
+
+
+@media (max-width: 1200px) {
+.descriptionSection {
+    flex-direction: column;
+}
+
+.descriptionRightSection {
+    height: auto;
+    width: 100%;
+
+    padding: 32px;
+    padding-left: 64px;
+    padding-right: 48px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.descriptionLeftSection {
+    height: auto;
+    width: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding: 32px;
+    padding-left: 64px;
+    padding-right: 48px;
+}
+
+.videoLeftSection {
+    padding: 32px;
+    padding-left: 64px;
+}
+
+.videoRightSection {
+    padding: 32px;
+    padding-right: 64px;
+}
+
+.leftSection {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.8;
+}
+
+.rightSection {
+    position: absolute;
+
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+
+    padding: 64px;
+}
+}
+
+@media (max-width: 900px) {
+.videoSection {
+    flex-direction: column;
+}
+
+.videoLeftSection {
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    padding-right: 64px;
+    padding-left: 64px;
+}
+
+.videoRightSection {
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    padding-right: 64px;
+    padding-left: 64px;
+}
+
+.getStartedSection h1 {
+    line-height: 1.5;
+    letter-spacing: 0.07em;
+    font-size: 3em;
+    font-weight: 300;
+
+    cursor: pointer;
+
+    text-align: left;
+    width: 10px;
+
+    padding-left: 16px;
+}
+
+.getStartedSection {
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    padding-left: 32px;
+
+}
+
+.rightSection h1 {
+    line-height: 1.2;
+    letter-spacing: 0.07em;
+    font-size: 4em;
+    font-weight: 400;
+
+    padding-bottom: 16px;
+}
+}
+
+@media (max-width: 600px) {
+.rightSection {
+    padding: 32px;
+}
+
+.descriptionRightSection {
+    padding: 16px;
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+.descriptionLeftSection {
+    padding: 16px;
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+.videoLeftSection {
+    padding: 32px;
+}
+
+.videoRightSection {
+    padding: 32px;
+}
+
+.searchBlock {
+
+    padding: 16px;
+}
+
+.bodyDarkText {
+    font-size: 1.15em;
+}
+
+.titleDarkText {
+    font-size: 1.35em;
+}
+
+.results {
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    overflow: hidden;
+}
+
+.results img {
+    height: 65%;
+    aspect-ratio: 1;
+}
+
+.resultsBottomSection {
+    position: absolute;
+    height: 50%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+
+    bottom: 4px;
+    left: 4px;
+}
+}

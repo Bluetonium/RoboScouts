@@ -174,7 +174,15 @@ background-color: var(--background);
 }
 
 main {
+    width: 100%;
+    height: auto;
+    padding: 0px;
     padding-top: 8px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .sectionBox {

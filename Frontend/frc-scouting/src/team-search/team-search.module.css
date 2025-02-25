@@ -126,7 +126,7 @@ margin-top: 64px;
 
   overflow: hidden;
 
-  padding: 80px 64px;
+  padding: 48px 64px;
 
   display: flex;
   flex-direction: column;
@@ -162,7 +162,7 @@ margin-top: 64px;
   align-items: center;
 }
 
-.searchResultsSection .verticalBox {
+.verticalBox {
   height: 100%;
   width: auto;
   flex-grow: 1;
@@ -174,7 +174,7 @@ margin-top: 64px;
   align-items: center;
 }
 
-.searchResultsSection .verticalBox .searchResults {
+.searchResults {
   height: auto;
   max-height: 100%;
   width: 100%;
@@ -189,7 +189,7 @@ margin-top: 64px;
   overflow-y: scroll;
 }
 
-.searchResultsSection .verticalBox .searchFooter {
+.searchFooter {
   height: 64px;
   width: 100%;
   
@@ -208,7 +208,7 @@ margin-top: 64px;
   padding: 16px 24px;
 }
 
-.searchResultsSection .verticalBox .searchFooter .footerButton {
+.footerButton {
   height: 100%;
   aspect-ratio: 1;
   padding: 2px;
@@ -228,7 +228,7 @@ margin-top: 64px;
   align-items: center;
 }
 
-.searchResultsSection .verticalBox .searchFooter .box {
+.box {
   position: relative;
   height: 100%;
   width: auto;
@@ -238,13 +238,13 @@ margin-top: 64px;
   align-items: center;
 }
 
-.searchResultsSection .verticalBox .searchFooter .footerButton:hover {
+.footerButton:hover {
   filter: invert(100%);
   background-color: var(--background);
   border: 3px solid #00000000;
 }
 
-.searchResultsSection .verticalBox .searchFooter input {
+.searchFooter input {
   height: 100%;
   width: 64px;
   outline: none;
@@ -274,7 +274,7 @@ margin-top: 64px;
   overflow: hidden;
 }
 
-.searchHeader .searchBar {
+.searchBar {
 height: 100%;
 width: 50%;
 
@@ -288,7 +288,7 @@ align-items: center;
 border: 3px solid var(--red);
 }
 
-.searchHeader .searchBar .imgBackground {
+.imgBackground {
 height: 100%;
 position: relative;
 width: auto;
@@ -304,7 +304,7 @@ justify-content: center;
 align-items: center;
 }
 
-.searchHeader .searchBar .imgBackground img {
+.imgBackground img {
 height: 100%;
 aspect-ratio: 1;
 
@@ -315,11 +315,11 @@ background: none;
 transition: 0.1s ease-in;
 }
 
-.searchHeader .searchBar .imgBackground:hover img {
+.imgBackground:hover img {
 transform: rotate(90deg);
 }
 
-.searchHeader .searchBar input {
+.searchBar input {
 width: 100%;
 
 background: none;
@@ -332,7 +332,7 @@ padding-bottom: 0px;
 margin-bottom: 0px;
 }
 
-.searchHeader .headerButton {
+.headerButton {
   height: 100%;
   aspect-ratio: 1;
 
@@ -347,14 +347,14 @@ margin-bottom: 0px;
   transition: 0.15s;
 }
 
-.searchHeader .headerButton:hover {
+.headerButton:hover {
   filter: invert(100%);
   background-color: var(--background);
   border: 3px solid #00000000;
   padding: 5px;
 }
 
-.verticalBox .searchResults .searchResult {
+.searchResult {
   height: 48px;
   width: 100%;
 
@@ -369,12 +369,12 @@ margin-bottom: 0px;
   align-items: center;
 }
 
-.verticalBox .searchResults .searchResult:hover {
+.searchResult:hover {
   background-color: #dfd6d7;
   
 }
 
-.teamInfo .teamHeader {
+.teamHeader {
   height: 200px;
   background-color: var(--red);
   width: 100%;
@@ -388,14 +388,14 @@ margin-bottom: 0px;
 
 }
 
-.teamInfo .teamHeader h2 {
+.teamHeader h2 {
   font-size: 2em;
   color: var(--background);
 
   line-height: 1.35;
 }
 
-.teamInfo .teamHeader h3 {
+.teamHeader h3 {
   margin-top: 8px;
   color: var(--background);
 }
@@ -460,7 +460,7 @@ margin-bottom: 0px;
     align-items: center;
   }
   
-  .searchResultsSection .verticalBox {
+  .verticalBox {
     height: auto;
     flex-grow: 0;
     width: 100%;
@@ -472,13 +472,13 @@ margin-bottom: 0px;
     align-items: center;
   }
 
-  .searchResultsSection .verticalBox .searchResults {
+  .searchResults {
     height: 200px;
     width: 100%;
     flex-grow: 0;
   }
 
-  .searchResultsSection .verticalBox .searchFooter {
+  .searchFooter {
     margin-bottom: 32px;
   }
   
@@ -487,11 +487,11 @@ margin-bottom: 0px;
     width: 100%;
   }
 
-  .searchHeader .searchBar {
+  .searchBar {
     width: 80%;
   }
 
-  .searchResultsSection .verticalBox .searchFooter {
+  .searchFooter {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -503,7 +503,7 @@ margin-bottom: 0px;
     height: 128px;
   }
 
-  .searchResultsSection .verticalBox .searchFooter .box {
+  .box {
     height: 50%;
     padding-bottom: 16px;
   }

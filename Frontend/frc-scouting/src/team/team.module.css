@@ -192,7 +192,7 @@ margin-top: 64px;
   padding: 64px;
 }
 
-.teamHero .teamLogo {
+.teamLogo {
     position: relative;
     height: 160px;
     aspect-ratio: 1;
@@ -201,7 +201,7 @@ margin-top: 64px;
     border-radius: 5px;
 }
 
-.teamHero .teamName {
+.teamName {
     height: auto;
     width: auto;
 
@@ -214,7 +214,7 @@ margin-top: 64px;
     align-self: flex-start;
 }
 
-.teamHero .teamName h2 {
+.teamName h2 {
     font-size: 2em;
 }
 
@@ -229,7 +229,7 @@ margin-top: 64px;
     padding: 64px;
 }
 
-.teamInformation .grid {
+.grid {
     height: auto;
     width: 100%;
 
@@ -250,7 +250,7 @@ margin-top: 64px;
 .e { grid-area: e; }
 .f { grid-area: f; }
 
-.teamInformation .grid .grid-item {
+.gridItem {
     background-color: var(--background);
     box-shadow: 0 0 24px rgba(0, 0, 0, 0.3);
 
@@ -276,7 +276,7 @@ margin-top: 64px;
     height: 100%;
 }
 
-.sideBar .sidebarHeader {
+.sidebarHeader {
     width: 100%;
 
     display: flex;
@@ -287,18 +287,18 @@ margin-top: 64px;
     padding: 32px;
 }
 
-.sideBar .sidebarHeader h1 {
+.sidebarHeader h1 {
     font-size: 2em;
 }
 
-.sideBar .sidebarHeader h2 {
+.sidebarHeader h2 {
     width: 100%;
     margin-bottom: 16px;
     padding-bottom: 16px;
     border-bottom: 2px solid var(--text);
 }
 
-.sideBar .websiteLink {
+.websiteLink {
     height: auto;
     width: 100%;
     padding: 32px;
@@ -315,21 +315,21 @@ margin-top: 64px;
     text-overflow: ellipsis;
 }
 
-.sideBar .websiteLink h3 {
+.websiteLink h3 {
     margin-bottom: 8px;
     text-wrap: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.sideBar .websiteLink a {
+.websiteLink a {
     text-decoration: underline;
     text-wrap: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.sideBar .randomInfo {
+.randomInfo {
     height: auto;
     width: 100%;
     padding: 32px;
@@ -342,11 +342,11 @@ margin-top: 64px;
     align-items: flex-start;
 }
 
-.sideBar .randomInfo h3 {
+.randomInfo h3 {
     margin-bottom: 24px;
 }
 
-.sideBar .randomInfo a {
+.randomInfo a {
     text-decoration: underline;
 }
 
@@ -383,7 +383,7 @@ margin-top: 64px;
     height: 100%;
 }
 
-.locationBox .leftSection {
+.leftSection {
     height: 100%;
     width: 50%;
 
@@ -395,15 +395,15 @@ margin-top: 64px;
     padding: 32px;
 }
 
-.locationBox .leftSection h2 {
+.leftSection h2 {
     padding-bottom: 16px;
 }
 
-.locationBox .leftSection h3 {
+.leftSection h3 {
     padding-bottom: 16px;
 }
 
-.locationBox .rightSection {
+.rightSection {
     width: 50%;
     height: 100%;
 }
@@ -432,7 +432,7 @@ margin-top: 64px;
     flex-direction: column;
 }
 
-.statsBox .statsHeader {
+.statsHeader {
     height: 64px;
     width: 100%;
 
@@ -445,7 +445,7 @@ margin-top: 64px;
     align-items: center;
 }
 
-.statsBox .statsSection {
+.statsSection {
     height: auto;
     width: 100%;
     display: flex;
@@ -456,7 +456,7 @@ margin-top: 64px;
     border-bottom: 3px solid var(--lightGray);
 }
 
-.statsBox .statsSection .statistic {
+.statistic {
     height: 40px;
     width: 100%;
     background-color: var(--background);
@@ -468,19 +468,15 @@ margin-top: 64px;
     align-items: center;
 }
 
-.statsBox .statsSection .statistic h3 {
+.statistic h3 {
     background: none;
 }
 
-.statsBox .statsSection .statistic:nth-child(even) {
+.statistic:nth-child(even) {
     background-color: var(--lightGray);
 }
 
-.statsBox .statsSection .statistic h3 {
-    background: none;
-}
-
-.statsBox .chartBox {
+.chartBox {
     height: 10px;
     flex-grow: 1;
 
@@ -496,7 +492,7 @@ margin-top: 64px;
     justify-self: flex-end;
 }
 
-.statsBox .chartBox2 {
+.chartBox2 {
     height: 10px;
     flex-grow: 1;
 
@@ -516,7 +512,7 @@ margin-top: 64px;
 }
 
 @media (max-width: 1300px) {
-    .teamInformation .grid {
+    .grid {
         height: auto;
         width: 100%;
     
@@ -566,7 +562,7 @@ margin-top: 64px;
 }
 
 @media (max-width: 750px) {
-    .teamInformation .grid {
+    .grid {
         height: auto;
         width: 100%;
     
@@ -607,7 +603,7 @@ margin-top: 64px;
         padding-left: 40px;
     }
     
-    .teamHero .teamLogo {
+    .teamLogo {
         position: relative;
         height: 80px;
         aspect-ratio: 1;
@@ -616,16 +612,16 @@ margin-top: 64px;
         border-radius: 5px;
     }
     
-    .teamHero .teamName {
+    .teamName {
         margin-top: 8px;
         margin-left: 0px;
     }
     
-    .teamHero .teamName h1 {
+    .teamName h1 {
         font-size: 2.75em;
     }
 
-    .teamHero .teamName h2 {
+    .teamName h2 {
         font-size: 1.5em;
     }
 }
