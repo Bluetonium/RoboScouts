@@ -154,7 +154,7 @@ const DataCollection = () => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'data.json'; // Specify the file name
+    a.download = `#${teamNumber} #${matchNumber}`; // Specify the file name
     document.body.appendChild(a);
     a.click(); // Trigger the download
     document.body.removeChild(a); // Clean up

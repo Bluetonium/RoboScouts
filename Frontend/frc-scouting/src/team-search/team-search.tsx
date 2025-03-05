@@ -12,12 +12,41 @@ import CTAButton from '../components/CTAButton';
 
 import { Link } from 'react-router-dom';
 
+import axios from 'axios';
+
 import '../constants.css';
 import style from './team-search.module.css';
 
 const TeamSearch = () => {
   const [showLoadingScreen, setShowLoadingScreen] = useState(true);
   const [showInstructions, setShowInstructions] = useState(false);
+
+  const [data, setData] = useState<any>(null);
+  //const [loading, setLoading] = useState<boolean>(true);
+  //const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        axios.get('https://api.frcdraft.com/api/team/127/ba').then((response) => {setData(response.data)});
+      } catch (err) {
+        //setError('Error fetching data');
+      } finally {
+        //setLoading(false);
+      }
+    };
+
+    console.log("hey");
+
+    fetchData();
+  }, []);
+
+  // Log data whenever it changes
+  useEffect(() => {
+    if (data) {
+      console.log("Fetched data:", data);
+    }
+  }, [data]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -75,7 +104,10 @@ const TeamSearch = () => {
             <div className={style.verticalBox}>
               <div className={style.searchResults}>
                 <div className={style.searchResult}>
-                  <h3 className={`bodyDarkText`}>#127 - Bluetonium</h3>
+                  <h3 className={`bodyDarkText`}>TESTTESTTESTTESTTUBE</h3>
+                </div>
+                <div className={style.searchResult}>
+                  <h3 className={`bodyDarkText`}>{data}</h3>
                 </div>
                 <div className={style.searchResult}>
                   <h3 className={`bodyDarkText`}>#127 - Bluetonium</h3>
