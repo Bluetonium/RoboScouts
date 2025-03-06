@@ -80,35 +80,39 @@ const DataCollection = () => {
 
   const [teamName, setTeamName] = useState("");
   const [teamNumber, setTeamNumber] = useState(0);
-  const [teamPosition, setTeamPosition] = useState("");
+  const [teamPosition, setTeamPosition] = useState("Blue 1");
   const [matchNumber, setMatchNumber] = useState(0);
+  const [matchYear, setMatchYear] = useState(2025);
 
   const [autoL4, setAutoL4] = useState(0);
   const [autoL3, setAutoL3] = useState(0);
   const [autoL2, setAutoL2] = useState(0);
   const [autoL1, setAutoL1] = useState(0);
-  const [autoMiss, setAutoMiss] = useState(0);
+  const [autoCoralMiss, setAutoCoralMiss] = useState(0);
 
   const [autoNet, setAutoNet] = useState(0);
   const [autoProcessor, setAutoProcessor] = useState(0);
+  const [autoAlgaeMiss, setAutoAlgaeMiss] = useState(0);
 
   const [autoLeave, setAutoLeave] = useState(false);
-  const [autoGround, setAutoGround] = useState(false);
+  const [autoGroundIntake, setAutoGroundIntake] = useState(false);
 
   const [teleL4, setTeleL4] = useState(0);
   const [teleL3, setTeleL3] = useState(0);
   const [teleL2, setTeleL2] = useState(0);
   const [teleL1, setTeleL1] = useState(0);
-  const [teleMiss, setTeleMiss] = useState(0);
+  const [teleCoralMiss, setTeleCoralMiss] = useState(0);
 
   const [teleNet, setTeleNet] = useState(0);
   const [teleProcessor, setTeleProcessor] = useState(0);
+  const [teleAlgaeMiss, setTeleAlgaeMiss] = useState(0);
 
-  const [teleGround, setTeleGround] = useState(false);
+  const [teleGroundIntake, setTeleGroundIntake] = useState(false);
 
-  const [teamHang, setTeamHang] = useState("");
+  const [teamHang, setTeamHang] = useState("None");
+  const [defense, setDefense] = useState("0");
 
-  const [notes, setNotes] = useState("");
+  const [notes, setNotes] = useState("None");
 
   function downloadJSON() {
     const jsonString = JSON.stringify({
@@ -116,37 +120,40 @@ const DataCollection = () => {
       number: teamNumber,
       position: teamPosition,
       match: matchNumber,
-      year: 2025,
+      year: matchYear,
       autoCoral: {
         L4: autoL4,
         L3: autoL3,
         L2: autoL2,
         L1: autoL1,
-        miss: autoMiss,
+        miss: autoCoralMiss,
       },
       autoAlgae: {
         net: autoNet,
-        processor: autoProcessor
+        processor: autoProcessor,
+        miss: autoAlgaeMiss
       },
-      autoLeave: {
+      autoOther: {
         leave: autoLeave,
-        ground: autoGround,
+        ground: autoGroundIntake,
       },
       teleCoral: {
         L4: teleL4,
         L3: teleL3,
         L2: teleL2,
         L1: teleL1,
-        miss: teleMiss,
+        miss: teleCoralMiss,
       },
       teleAlgae: {
         net: teleNet,
-        processor: teleProcessor
+        processor: teleProcessor,
+        miss: teleAlgaeMiss
       },
       hang: teamHang,
-      teleLeave: {
-        ground: teleGround,
+      teleOther: {
+        ground: teleGroundIntake,
       },
+      defense: defense,
       notes: notes,
     }, null, 4);
 
@@ -167,37 +174,40 @@ const DataCollection = () => {
       number: teamNumber,
       position: teamPosition,
       match: matchNumber,
-      year: 2025,
+      year: matchYear,
       autoCoral: {
         L4: autoL4,
         L3: autoL3,
         L2: autoL2,
         L1: autoL1,
-        miss: autoMiss,
+        miss: autoCoralMiss,
       },
       autoAlgae: {
         net: autoNet,
-        processor: autoProcessor
+        processor: autoProcessor,
+        miss: autoAlgaeMiss
       },
-      autoLeave: {
+      autoOther: {
         leave: autoLeave,
-        ground: autoGround,
+        ground: autoGroundIntake,
       },
       teleCoral: {
         L4: teleL4,
         L3: teleL3,
         L2: teleL2,
         L1: teleL1,
-        miss: teleMiss,
+        miss: teleCoralMiss,
       },
       teleAlgae: {
         net: teleNet,
-        processor: teleProcessor
+        processor: teleProcessor,
+        miss: teleAlgaeMiss
       },
       hang: teamHang,
-      teleLeave: {
-        ground: teleGround,
+      teleOther: {
+        ground: teleGroundIntake,
       },
+      defense: defense,
       notes: notes,
     }, null, 4);
 
@@ -225,14 +235,15 @@ const DataCollection = () => {
                     <TextField text='Team Name: ' value={teamName} onChange={setTeamName} placeholder='Bluetonium' ></TextField>
                     <NumberField text='Team Number: ' value={teamNumber} onChange={setTeamNumber} />
                     <Dropdown text='Team Position: ' value={teamPosition} onChange={setTeamPosition} options={[
-                        { value: 'blue1', label: 'Blue 1' },
-                        { value: 'blue2', label: 'Blue 2' },
-                        { value: 'blue3', label: 'Blue 3' },
-                        { value: 'red1', label: 'Red 1' },
-                        { value: 'red2', label: 'Red 2' },
-                        { value: 'red3', label: 'Red 3' },
+                        { value: 'Blue 1', label: 'Blue 1' },
+                        { value: 'Blue 2', label: 'Blue 2' },
+                        { value: 'Blue 3', label: 'Blue 3' },
+                        { value: 'Red 1', label: 'Red 1' },
+                        { value: 'Red 2', label: 'Red 2' },
+                        { value: 'Red 3', label: 'Red 3' },
                     ]}/>
                     <NumberField text='Match Number: ' value={matchNumber} onChange={setMatchNumber} />
+                    <NumberField text='Match Year: ' value={matchYear} onChange={setMatchYear} />
                 </div>
             </div>
             <div className={styles.section1} style={{ left: ((100 + (currentSlide * -100)).toString() + "%") }}>
@@ -247,9 +258,10 @@ const DataCollection = () => {
                         <h3 className={`bodyDarkText ${styles.headerBlock}`}>Algae</h3>
                         <CounterField value={autoNet} onChange={setAutoNet} text='Net:'></CounterField>
                         <CounterField value={autoProcessor} onChange={setAutoProcessor} text='Processor:'></CounterField>
-                        <h3 className={`bodyDarkText ${styles.headerBlock}`}>Exit</h3>
-                        <Checkbox text='Ground: ' checked={autoGround} onChange={setAutoGround} />
-                        <Checkbox text='Leave: ' checked={autoLeave} onChange={setAutoLeave} />
+                        <CounterField value={autoAlgaeMiss} onChange={setAutoAlgaeMiss} text='Miss:'></CounterField>
+                        <h3 className={`bodyDarkText ${styles.headerBlock}`}>Other</h3>
+                        <Checkbox text='Ground Intake: ' checked={autoGroundIntake} onChange={setAutoGroundIntake} />
+                        <Checkbox text='Auton Leave: ' checked={autoLeave} onChange={setAutoLeave} />
                       </div>
                       <div className={styles.rightSide}>
                         <h3 className={`bodyDarkText ${styles.headerBlock}`}>Coral</h3>
@@ -257,7 +269,7 @@ const DataCollection = () => {
                         <CounterField value={autoL3} onChange={setAutoL3} text='L3:'></CounterField>
                         <CounterField value={autoL2} onChange={setAutoL2} text='L2:'></CounterField>
                         <CounterField value={autoL1} onChange={setAutoL1} text='L1:'></CounterField>
-                        <CounterField value={autoMiss} onChange={setAutoMiss} text='Miss:'></CounterField>
+                        <CounterField value={autoCoralMiss} onChange={setAutoCoralMiss} text='Miss:'></CounterField>
                       </div>
                     </div>
                     <div className={styles.rightBlock}>
@@ -267,14 +279,15 @@ const DataCollection = () => {
                         <CounterField value={teleL3} onChange={setTeleL3} text='L3:'></CounterField>
                         <CounterField value={teleL2} onChange={setTeleL2} text='L2:'></CounterField>
                         <CounterField value={teleL1} onChange={setTeleL1} text='L1:'></CounterField>
-                        <CounterField value={teleMiss} onChange={setTeleMiss} text='Miss:'></CounterField>
+                        <CounterField value={teleCoralMiss} onChange={setTeleCoralMiss} text='Miss:'></CounterField>
                       </div>
                       <div className={styles.rightSide}>
                         <h3 className={`bodyDarkText ${styles.headerBlock}`}>Algae</h3>
                         <CounterField value={teleNet} onChange={setTeleNet} text='Net:'></CounterField>
                         <CounterField value={teleProcessor} onChange={setTeleProcessor} text='Processor:'></CounterField>
+                        <CounterField value={teleAlgaeMiss} onChange={setTeleAlgaeMiss} text='Miss:'></CounterField>
                         <h3 className={`bodyDarkText ${styles.headerBlock}`}>Exit</h3>
-                        <Checkbox text='Ground: ' checked={teleGround} onChange={setTeleGround} />
+                        <Checkbox text='Ground Intake: ' checked={teleGroundIntake} onChange={setTeleGroundIntake} />
                       </div>
                     </div>
                 </div>
@@ -283,9 +296,18 @@ const DataCollection = () => {
               <div className={styles.centerColumn}>
                     <h2 className={`bodyDarkText ${styles.centerColumnTitleBlock}`}>Post Match</h2>
                     <Dropdown text='Hang: ' value={teamHang} onChange={setTeamHang} options={[
-                        { value: 'deep', label: 'Deep' },
-                        { value: 'shallow', label: 'Shallow' },
-                        { value: 'none', label: 'None' },
+                        { value: 'Deep', label: 'Deep' },
+                        { value: 'Shallow', label: 'Shallow' },
+                        { value: 'Park', label: 'Park' },
+                        { value: 'None', label: 'None' },
+                    ]}/>
+                    <Dropdown text='Defense: ' value={defense} onChange={setDefense} options={[
+                        { value: '0', label: '0 (No defense)' },
+                        { value: '1', label: '1' },
+                        { value: '2', label: '2' },
+                        { value: '3', label: '3' },
+                        { value: '4', label: '4' },
+                        { value: '5', label: '5' },
                     ]}/>
                     <Paragraph text='Notes: ' placeholder='Notes notes notes...' value={notes} maxLength={570} onChange={setNotes}></Paragraph>
                 </div>
@@ -310,14 +332,15 @@ const DataCollection = () => {
                 <TextField text='Team Name: ' value={teamName} onChange={setTeamName} placeholder='Bluetonium' ></TextField>
                 <NumberField text='Team Number: ' value={teamNumber} onChange={setTeamNumber} />
                 <Dropdown text='Team Position: ' value={teamPosition} onChange={setTeamPosition} options={[
-                    { value: 'blue1', label: 'Blue 1' },
-                    { value: 'blue2', label: 'Blue 2' },
-                    { value: 'blue3', label: 'Blue 3' },
-                    { value: 'red1', label: 'Red 1' },
-                    { value: 'red2', label: 'Red 2' },
-                    { value: 'red3', label: 'Red 3' },
+                    { value: 'Blue 1', label: 'Blue 1' },
+                    { value: 'Blue 2', label: 'Blue 2' },
+                    { value: 'Blue 3', label: 'Blue 3' },
+                    { value: 'Red 1', label: 'Red 1' },
+                    { value: 'Red 2', label: 'Red 2' },
+                    { value: 'Red 3', label: 'Red 3' },
                 ]}/>
                 <NumberField text='Match Number: ' value={matchNumber} onChange={setMatchNumber} />
+                <NumberField text='Match Year: ' value={matchYear} onChange={setMatchYear} />
             </div>
           </div>
           <div className={styles.mobileSection1} style={{ left: ((100 + (currentSlide * -100)).toString() + "%") }}>
@@ -327,13 +350,14 @@ const DataCollection = () => {
               <CounterField value={autoL3} onChange={setAutoL3} text='L3:'></CounterField>
               <CounterField value={autoL2} onChange={setAutoL2} text='L2:'></CounterField>
               <CounterField value={autoL1} onChange={setAutoL1} text='L1:'></CounterField>
-              <CounterField value={autoMiss} onChange={setAutoMiss} text='Miss:'></CounterField>
+              <CounterField value={autoCoralMiss} onChange={setAutoCoralMiss} text='Miss:'></CounterField>
               <h3 className={`bodyDarkText ${styles.headerBlock}`}>Algae</h3>
               <CounterField value={autoNet} onChange={setAutoNet} text='Net:'></CounterField>
               <CounterField value={autoProcessor} onChange={setAutoProcessor} text='Processor:'></CounterField>
-              <h3 className={`bodyDarkText ${styles.headerBlock}`}>Exit</h3>
-              <Checkbox text='Ground: ' checked={autoGround} onChange={setAutoGround} />
-              <Checkbox text='Leave: ' checked={autoLeave} onChange={setAutoLeave} />
+              <CounterField value={autoAlgaeMiss} onChange={setAutoAlgaeMiss} text='Miss:'></CounterField>
+              <h3 className={`bodyDarkText ${styles.headerBlock}`}>Other</h3>
+              <Checkbox text='Ground Intake: ' checked={autoGroundIntake} onChange={setAutoGroundIntake} />
+              <Checkbox text='Auton Leave: ' checked={autoLeave} onChange={setAutoLeave} />
           </div>
           <div className={styles.mobileSection2} style={{ left: ((200 + (currentSlide * -100)).toString() + "%") }}>
             <h2 className={`bodyDarkText ${styles.centerColumnTitleBlock}`}>{"Tele-Op: #" + teamNumber}</h2>
@@ -342,20 +366,30 @@ const DataCollection = () => {
             <CounterField value={teleL3} onChange={setTeleL3} text='L3:'></CounterField>
             <CounterField value={teleL2} onChange={setTeleL2} text='L2:'></CounterField>
             <CounterField value={teleL1} onChange={setTeleL1} text='L1:'></CounterField>
-            <CounterField value={teleMiss} onChange={setTeleMiss} text='Miss:'></CounterField>
+            <CounterField value={teleCoralMiss} onChange={setTeleCoralMiss} text='Miss:'></CounterField>
             <h3 className={`bodyDarkText ${styles.headerBlock}`}>Algae</h3>
             <CounterField value={teleNet} onChange={setTeleNet} text='Net:'></CounterField>
             <CounterField value={teleProcessor} onChange={setTeleProcessor} text='Processor:'></CounterField>
-            <h3 className={`bodyDarkText ${styles.headerBlock}`}>Exit</h3>
-            <Checkbox text='Ground: ' checked={teleGround} onChange={setTeleGround} />
+            <CounterField value={teleAlgaeMiss} onChange={setTeleAlgaeMiss} text='Miss:'></CounterField>
+            <h3 className={`bodyDarkText ${styles.headerBlock}`}>Other</h3>
+            <Checkbox text='Ground Intake: ' checked={teleGroundIntake} onChange={setTeleGroundIntake} />
           </div>
           <div className={styles.mobileSection3} style={{ left: ((300 + (currentSlide * -100)).toString() + "%") }}>
             <div className={styles.mobileCenterColumn}>
                 <h2 className={`bodyDarkText ${styles.centerColumnTitleBlock}`}>{"Post Match: #" + teamNumber}</h2>
                 <Dropdown text='Hang: ' value={teamHang} onChange={setTeamHang} options={[
-                    { value: 'deep', label: 'Deep' },
-                    { value: 'shallow', label: 'Shallow' },
-                    { value: 'none', label: 'None' },
+                    { value: 'Deep', label: 'Deep' },
+                    { value: 'Shallow', label: 'Shallow' },
+                    { value: 'Park', label: 'Park' },
+                    { value: 'None', label: 'None' },
+                ]}/>
+                <Dropdown text='Defense: ' value={defense} onChange={setDefense} options={[
+                    { value: '0', label: '0 (No defense)' },
+                    { value: '1', label: '1' },
+                    { value: '2', label: '2' },
+                    { value: '3', label: '3' },
+                    { value: '4', label: '4' },
+                    { value: '5', label: '5' },
                 ]}/>
                 <Paragraph text='Notes: ' placeholder='Notes notes notes...' value={notes} maxLength={570} onChange={setNotes}></Paragraph>
             </div>

@@ -1,0 +1,262 @@
+:root {
+
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+  
+    line-height: 1.5;
+    font-weight: 400;
+  
+    /*color-scheme: light dark;*/
+  
+    --background: #F7EBEC;
+    --text: #151515;
+    --lightText: #444444;
+    --red: #FF6961;
+    --blue: #4F738E;
+    --lightGray: #dfd6d7;
+  
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+* {
+padding: 0;
+margin: 0;
+box-sizing: border-box;
+
+font-family: inherit;
+font-size: inherit;
+color: inherit;
+}
+
+.slightlyBold {
+    font-weight: 500;
+}
+
+.bodyDarkText {
+font-family: "M PLUS Code Latin", monospace;
+font-optical-sizing: auto;
+font-style: normal;
+
+line-height: 1.40;
+letter-spacing: 0.04em;
+font-size: 1.2em;
+font-weight: 400;
+
+vertical-align: middle;
+
+color: var(--text);
+
+font-synthesis: none;
+text-rendering: optimizeLegibility;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+
+.titleDarkText {
+font-family: "M PLUS Code Latin", monospace;
+font-optical-sizing: auto;
+font-style: normal;
+
+line-height: 1.60;
+letter-spacing: 0.04em;
+font-size: 1.5em;
+font-weight: 400;
+
+vertical-align: middle;
+
+color: var(--text);
+
+font-synthesis: none;
+text-rendering: optimizeLegibility;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+
+.headerDarkText {
+font-family: "M PLUS Code Latin", monospace;
+font-optical-sizing: auto;
+font-style: normal;
+
+line-height: 1.5;
+letter-spacing: 0.04em;
+font-size: 4em;
+font-weight: 400;
+
+vertical-align: middle;
+
+color: var(--text);
+
+font-synthesis: none;
+text-rendering: optimizeLegibility;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+
+.bodyLightText {
+    font-family: "M PLUS Code Latin", monospace;
+    font-optical-sizing: auto;
+    font-style: normal;
+    
+    line-height: 1.40;
+    letter-spacing: 0.04em;
+    font-size: 1.2em;
+    font-weight: 400;
+    
+    vertical-align: middle;
+    
+    color: var(--background);
+    
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    }
+
+.titleLightText {
+    font-family: "M PLUS Code Latin", monospace;
+    font-optical-sizing: auto;
+    font-style: normal;
+    
+    line-height: 1.60;
+    letter-spacing: 0.04em;
+    font-size: 1.5em;
+    font-weight: 400;
+    
+    vertical-align: middle;
+    
+    color: var(--background);
+    
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+    
+.headerLightText {
+    font-family: "M PLUS Code Latin", monospace;
+    font-optical-sizing: auto;
+    font-style: normal;
+    
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    font-size: 4em;
+    font-weight: 400;
+    
+    vertical-align: middle;
+    
+    color: var(--background);
+    
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+.noSelect 
+{
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+}
+
+
+html {
+background-color: var(--background);
+}
+
+main {
+margin-top: 64px;
+}
+
+.teamHero {
+  position: relative;
+  height: 40vh;
+  width: 100%;
+
+  background-color: var(--red);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  padding: 64px;
+}
+
+.bodyText {
+    height: auto;
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    padding: 48px 64px;
+}
+
+.column {
+    height: auto;
+    width: 60%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.header {
+    font-size: 3.5em;
+
+    margin-bottom: -0.15em;
+}
+
+.title {
+    font-size: 2.5em;
+}
+
+@media (max-width: 1000px) {
+    .column {
+        height: auto;
+        width: 75%;
+    }
+}
+
+@media (max-width: 750px) {
+    .teamHero {
+        position: relative;
+        height: auto;
+        width: 100%;
+        
+        background-color: var(--red);
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        
+        padding: 32px;
+        padding-left: 40px;
+    }
+    
+    .teamHero h1 {
+        font-size: 2.75em;
+    }
+
+    .bodyText {
+        padding: 24px 32px;
+    }
+    
+    .column {
+        height: auto;
+        width: 100%;
+    }
+}

@@ -99,31 +99,36 @@ const DataCollection = () => {
   const [teamNumber, setTeamNumber] = useState(0);
   const [teamPosition, setTeamPosition] = useState("None");
   const [matchNumber, setMatchNumber] = useState(0);
+  const [matchYear, setMatchYear] = useState(0);
 
   const [autoL4, setAutoL4] = useState(0);
   const [autoL3, setAutoL3] = useState(0);
   const [autoL2, setAutoL2] = useState(0);
   const [autoL1, setAutoL1] = useState(0);
-  const [autoMiss, setAutoMiss] = useState(0);
+  const [autoCoralMiss, setAutoCoralMiss] = useState(0);
 
   const [autoNet, setAutoNet] = useState(0);
   const [autoProcessor, setAutoProcessor] = useState(0);
+  const [autoAlgaeMiss, setAutoAlgaeMiss] = useState(0);
 
   const [autoLeave, setAutoLeave] = useState(false);
-  const [autoGround, setAutoGround] = useState(false);
+  const [autoGroundIntake, setAutoGroundIntake] = useState(false);
 
   const [teleL4, setTeleL4] = useState(0);
   const [teleL3, setTeleL3] = useState(0);
   const [teleL2, setTeleL2] = useState(0);
   const [teleL1, setTeleL1] = useState(0);
-  const [teleMiss, setTeleMiss] = useState(0);
+  const [teleCoralMiss, setTeleCoralMiss] = useState(0);
 
   const [teleNet, setTeleNet] = useState(0);
   const [teleProcessor, setTeleProcessor] = useState(0);
+  const [teleAlgaeMiss, setTeleAlgaeMiss] = useState(0);
 
-  const [teleGround, setTeleGround] = useState(false);
+  const [teleGroundIntake, setTeleGroundIntake] = useState(false);
 
   const [teamHang, setTeamHang] = useState("None");
+
+  const [defense, setDefense] = useState("0");
 
   const [notes, setNotes] = useState("None");
 
@@ -135,38 +140,36 @@ const DataCollection = () => {
 
     setTeamName(teamData.name);
     setTeamNumber(teamData.number);
-
-    if(teamData.position == "red1") { setTeamPosition("Red 1"); } else
-    if(teamData.position == "red2") { setTeamPosition("Red 2"); } else 
-    if(teamData.position == "red3") { setTeamPosition("Red 3"); } else 
-    if(teamData.position == "blue1") { setTeamPosition("Blue 1"); } else 
-    if(teamData.position == "blue2") { setTeamPosition("Blue 2"); } else 
-    if(teamData.position == "blue3") { setTeamPosition("Blue 3"); }
+    setTeamPosition(teamData.position);
 
     setMatchNumber(teamData.match);
+    setMatchYear(teamData.year)
 
     setAutoL4(teamData.autoCoral.L4);
     setAutoL3(teamData.autoCoral.L3);
     setAutoL2(teamData.autoCoral.L2);
     setAutoL1(teamData.autoCoral.L1);
-    setAutoMiss(teamData.autoCoral.miss);
+    setAutoCoralMiss(teamData.autoCoral.miss);
     setAutoNet(teamData.autoAlgae.net);
     setAutoProcessor(teamData.autoAlgae.processor);
+    setAutoAlgaeMiss(teamData.autoAlgae.miss)
 
-    setAutoGround(teamData.autoLeave.ground);
-    setAutoLeave(teamData.autoLeave.leave);
+    setAutoGroundIntake(teamData.autoOther.ground);
+    setAutoLeave(teamData.autoOther.leave);
 
     setTeleL4(teamData.teleCoral.L4);
     setTeleL3(teamData.teleCoral.L3);
     setTeleL2(teamData.teleCoral.L2);
     setTeleL1(teamData.teleCoral.L1);
-    setTeleMiss(teamData.teleCoral.miss);
+    setTeleCoralMiss(teamData.teleCoral.miss);
     setTeleNet(teamData.teleAlgae.net);
     setTeleProcessor(teamData.teleAlgae.processor);
+    setTeleAlgaeMiss(teamData.teleAlgae.miss);
 
-    setTeleGround(teamData.teleLeave.ground);
+    setTeleGroundIntake(teamData.teleOther.ground);
 
     setTeamHang(teamData.hang);
+    setDefense(teamData.defense);
     setNotes(teamData.notes);
   };
 
@@ -176,27 +179,32 @@ const DataCollection = () => {
     setTeamNumber(0);
     setTeamPosition("None");
     setMatchNumber(0);
+    setMatchYear(0);
+
     setAutoL4(0);
     setAutoL3(0);
     setAutoL2(0);
     setAutoL1(0);
-    setAutoMiss(0);
+    setAutoCoralMiss(0);
     setAutoNet(0);
     setAutoProcessor(0);
-    setAutoGround(false);
+    setAutoAlgaeMiss(0);
+    setAutoGroundIntake(false);
     setAutoLeave(false);
 
     setTeleL4(0);
     setTeleL3(0);
     setTeleL2(0);
     setTeleL1(0);
-    setTeleMiss(0);
+    setTeleCoralMiss(0);
     setTeleNet(0);
     setTeleProcessor(0);
+    setTeleAlgaeMiss(0);
 
-    setTeleGround(false);
+    setTeleGroundIntake(false);
 
     setTeamHang("None");
+    setDefense("0");
     setNotes("None");
 
     dataMap.delete(key);
@@ -379,7 +387,7 @@ const DataCollection = () => {
         </div>
 
         <div className={style.teamHeader}>
-          <h3 className={`bodyDarkText`}>#{teamNumber} ({teamName}), Match #{matchNumber}, {teamPosition}</h3>
+          <h3 className={`bodyDarkText`}>#{teamNumber} ({teamName}), Match #{matchNumber}, {teamPosition}, {matchYear}</h3>
         </div>
 
         <div className={style.teamData}>
@@ -403,7 +411,7 @@ const DataCollection = () => {
             </div>
             <div className={style.teamDataItem}>
               <h3 className={`bodyDarkText`}>Miss</h3>
-              <h3 className={`bodyDarkText`}>{autoMiss}</h3>
+              <h3 className={`bodyDarkText`}>{autoCoralMiss}</h3>
             </div>
             <div className={style.teamDataItem}>
               <h3 className={`bodyDarkText`}>Net</h3>
@@ -414,11 +422,15 @@ const DataCollection = () => {
               <h3 className={`bodyDarkText`}>{autoProcessor}</h3>
             </div>
             <div className={style.teamDataItem}>
-              <h3 className={`bodyDarkText`}>Ground</h3>
-              <h3 className={`bodyDarkText`}>{autoGround && "Yes" || "No"}</h3>
+              <h3 className={`bodyDarkText`}>Miss</h3>
+              <h3 className={`bodyDarkText`}>{autoAlgaeMiss}</h3>
             </div>
             <div className={style.teamDataItem}>
-              <h3 className={`bodyDarkText`}>Leave</h3>
+              <h3 className={`bodyDarkText`}>Ground Intake</h3>
+              <h3 className={`bodyDarkText`}>{autoGroundIntake && "Yes" || "No"}</h3>
+            </div>
+            <div className={style.teamDataItem}>
+              <h3 className={`bodyDarkText`}>Auton Leave</h3>
               <h3 className={`bodyDarkText`}>{autoLeave && "Yes" || "No"}</h3>
             </div>
           </div>
@@ -442,7 +454,7 @@ const DataCollection = () => {
             </div>
             <div className={style.teamDataItem}>
               <h3 className={`bodyDarkText`}>Miss</h3>
-              <h3 className={`bodyDarkText`}>{teleMiss}</h3>
+              <h3 className={`bodyDarkText`}>{teleCoralMiss}</h3>
             </div>
             <div className={style.teamDataItem}>
               <h3 className={`bodyDarkText`}>Net</h3>
@@ -453,8 +465,12 @@ const DataCollection = () => {
               <h3 className={`bodyDarkText`}>{teleProcessor}</h3>
             </div>
             <div className={style.teamDataItem}>
-              <h3 className={`bodyDarkText`}>Leave</h3>
-              <h3 className={`bodyDarkText`}>{teleGround && "Yes" || "No"}</h3>
+              <h3 className={`bodyDarkText`}>Miss</h3>
+              <h3 className={`bodyDarkText`}>{teleAlgaeMiss}</h3>
+            </div>
+            <div className={style.teamDataItem}>
+              <h3 className={`bodyDarkText`}>Ground Intake</h3>
+              <h3 className={`bodyDarkText`}>{teleGroundIntake && "Yes" || "No"}</h3>
             </div>
           </div>
           <div className={style.teamDataColumn}>
@@ -462,6 +478,10 @@ const DataCollection = () => {
             <div className={style.teamDataItem}>
               <h3 className={`bodyDarkText`}>Hang</h3>
               <h3 className={`bodyDarkText`}>{teamHang}</h3>
+            </div>
+            <div className={style.teamDataItem}>
+              <h3 className={`bodyDarkText`}>Defense</h3>
+              <h3 className={`bodyDarkText`}>{defense}</h3>
             </div>
             <div className={style.teamDataNotes}>
               <h3 className={`bodyDarkText`}>{notes}</h3>

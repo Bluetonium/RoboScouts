@@ -37,11 +37,13 @@ function MobileNavigation(props: Props) {
   let linksMap = new Map();
 
   linksMap.set('Scouting', [
+    {title: "Get Started", link:"/get-started"},
     {title: "Data Collection", link:"/scouting/data-collection"},
   ]);
 
   linksMap.set('Analysis', [
       {title: "Data Analysis", link:"/analysis/data-analysis"},
+      {title: "Team Analysis", link:"/analysis/team-analysis"},
   ]);
 
   linksMap.set('Tools', [

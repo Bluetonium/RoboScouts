@@ -15,6 +15,8 @@ import Tooltip from '../components/Tooltip';
 import '../constants.css';
 import style from './home-page.module.css';
 
+import { Link } from 'react-router-dom';
+
 {/* Give credit to ionicons and the notification video and the loading screen, change images to ones i own */}
 {/* Cookie notif, Banner notif */}
 
@@ -54,8 +56,12 @@ function App() {
             <h1 className={`titleDarkText`}>FRC RoboScouts</h1>
             <h3 className={`bodyDarkText`}>Predictions and alliances easier than ever before. Powered by Bluetonium 127.</h3>
             <div className={style.buttonBox}>
-              <CTAButton color='var(--red)' textColor="var(--text)" style={{ marginRight: '24px' }} hoverMode="hoverMode1">Get Started</CTAButton>
-              <ColorButton color='transparent' textColor="var(--blue)" hoverMode="hoverMode2">Learn More</ColorButton>
+              <Link to={"/get-started"}>
+                <CTAButton color='var(--red)' textColor="var(--text)" style={{ marginRight: '24px' }} hoverMode="hoverMode1">Get Started</CTAButton>
+              </Link>
+              <Link to={"/scouting/data-collection"}>
+                <ColorButton color='transparent' textColor="var(--blue)" hoverMode="hoverMode2">Try it Out</ColorButton>
+              </Link>
             </div>
           </div>
         </div>
@@ -64,7 +70,10 @@ function App() {
 
             <h2 className={`headerDarkText`}>FRC Scouting</h2>
             <h3 className={`bodyDarkText`}>Intuitive scouting tools for FRC teams at no cost. Gather data about alliances, make match predictions, and analyze statistics! Created by Bluetonium 127.</h3>
-            <CTAButton color='var(--red)' textColor="var(--text)" style={{ marginRight: '24px' }} hoverMode="hoverMode1">Register a team</CTAButton>
+            
+            <Link to={"/get-started"}>
+              <CTAButton color='var(--red)' textColor="var(--text)" style={{ marginRight: '24px' }} hoverMode="hoverMode1">Get Started</CTAButton>
+            </Link>
 
           </div>
           <div className={style.descriptionRightSection}>
@@ -104,7 +113,9 @@ function App() {
             <div className={style.textBox}>
               <h2 className={`headerDarkText`}>Easy to Use</h2>
               <h3 className={`bodyDarkText`}>Our scouting tools are effective, efficient, and ✨stylish✨. Get the information you need fast, and scout teams with ease.</h3>
-              <CTAButton color='var(--red)' textColor="var(--text)" style={{ marginRight: '24px' }} hoverMode="hoverMode1">How does scouting work?</CTAButton>
+              <Link to={"/get-started"}>
+                <CTAButton color='var(--red)' textColor="var(--text)" style={{ marginRight: '24px' }} hoverMode="hoverMode1">How does scouting work?</CTAButton>
+              </Link>
             </div>
           </div>
         </div>

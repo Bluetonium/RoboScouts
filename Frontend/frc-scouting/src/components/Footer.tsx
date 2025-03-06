@@ -36,10 +36,12 @@ function Footer() {
 
     linksMap.set('Scouting', [
         {title: "Data Collection", link:"/scouting/data-collection"},
+        {title: "Get Started", link:"/get-started"},
     ]);
 
     linksMap.set('Analysis', [
         {title: "Data Analysis", link:"/analysis/data-analysis"},
+        {title: "Team Analysis", link:"/analysis/team-analysis"},
     ]);
 
     linksMap.set('Tools', [
@@ -80,8 +82,12 @@ function Footer() {
             <div className={styles.divider} />
             <div className={styles.topSection}>
                 <div className={styles.footerColumn}>
-                    <h2 className="titleDarkText">RoboScouts</h2>
-                    <h3 className="bodyDarkText" style={{ paddingBottom: '16px' }}>From Bluetonium 127!</h3>
+                    <Link to={"/"}>
+                        <h2 className="titleDarkText">RoboScouts</h2>
+                    </Link>
+                    <Link to={"/about-us"}>
+                        <h3 className="bodyDarkText" style={{ paddingBottom: '16px' }}>From Bluetonium 127!</h3>
+                    </Link>
                     <div>
                     <ColorButton color='transparent' id='confettiButton' textColor="var(--blue)" hoverMode="hoverMode2" onClick={countButton}>Count is {count}</ColorButton>
                     {confettiButton != null && showConfetti && (
@@ -106,7 +112,9 @@ function Footer() {
             <div className={styles.divider} />
             <div className={styles.bottomSection}>
                 <div className={styles.leftSection}>
-                    <h3 className="bodyDarkText">© Silas Lovett 2024. All Rights Reserved.</h3>
+                    <Link to={"/legal/terms-and-conditions"}>
+                        <h3 className="bodyDarkText">© Silas Lovett 2025. All Rights Reserved.</h3>
+                    </Link>
                 </div>
             </div>
         </div>

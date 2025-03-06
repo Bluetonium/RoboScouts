@@ -104,12 +104,6 @@ const TeamSearch = () => {
             <div className={style.verticalBox}>
               <div className={style.searchResults}>
                 <div className={style.searchResult}>
-                  <h3 className={`bodyDarkText`}>TESTTESTTESTTESTTUBE</h3>
-                </div>
-                <div className={style.searchResult}>
-                  <h3 className={`bodyDarkText`}>{data}</h3>
-                </div>
-                <div className={style.searchResult}>
                   <h3 className={`bodyDarkText`}>#127 - Bluetonium</h3>
                 </div>
                 <div className={style.searchResult}>

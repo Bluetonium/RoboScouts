@@ -18,11 +18,13 @@ function HeaderBar() {
     const toast = useToast();
 
     linksMap.set('Scouting', [
+        {title: "Get Started", link:"/get-started"},
         {title: "Data Collection", link:"/scouting/data-collection"},
     ]);
 
     linksMap.set('Analysis', [
         {title: "Data Analysis", link:"/analysis/data-analysis"},
+        {title: "Team Analysis", link:"/analysis/team-analysis"},
     ]);
 
     linksMap.set('Tools', [
@@ -92,7 +94,9 @@ function HeaderBar() {
                     {generateHeaderLinks()}
                 </div>
                 <div className={styles.headerRightSection}>
-                    <CTAButton color='var(--red)' textColor="var(--text)" hoverMode="hoverMode1">Get Started</CTAButton>
+                    <Link to={"/get-started"}>
+                        <CTAButton color='var(--red)' textColor="var(--text)" hoverMode="hoverMode1">Get Started</CTAButton>
+                    </Link>
 
                     <div className={styles.accountSquare} onClick={handleClick} style={{ display: "none" }}>
                         <img className={styles.accountSquareImg} src={defaultPFP} alt="User  Profile"/>
